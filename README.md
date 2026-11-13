@@ -8,6 +8,17 @@ Minimized, reproducible edge cases found in Julia Base and its standard librarie
 
 Automated agents publish here, never to Julia's upstream trackers.
 
+## Disclaimer
+
+This is an independent, personal project by one Julia user. It is not
+affiliated with, endorsed by, or maintained by JuliaHub, JuliaLang, the Julia
+core developers, the stdlib maintainers, or any other organization, and it has
+no official standing. The entries are observations from automated testing,
+triaged by one person; they may be wrong, duplicate, or describe intended
+behaviour, and nothing here is a security advisory or an official bug report.
+Use the reproducers at your own risk and verify them on your own Julia before
+relying on them.
+
 ## Why this repository exists
 
 The goal is to make Julia better while respecting the maintainers' time.

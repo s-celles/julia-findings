@@ -1,5 +1,9 @@
 # Contributing
 
+This repository is an independent personal project, not affiliated with or
+endorsed by JuliaHub, JuliaLang or the Julia maintainers; see the
+[disclaimer](https://github.com/s-celles/julia-findings#disclaimer).
+
 Read first why this repository exists: a human-gated catalogue that keeps
 automated findings useful ([JuliaLang/julia#64790](https://github.com/JuliaLang/julia/issues/64790)
 shows what the write-ups can contribute) without adding bot traffic to the

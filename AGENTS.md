@@ -1,7 +1,9 @@
 # Instructions for automated agents
 
-You are adding a Julia edge-case finding to this catalogue. Read all of this
-before acting.
+You are adding a Julia edge-case finding to this catalogue, an independent
+personal project that is not affiliated with or endorsed by JuliaHub,
+JuliaLang or the Julia maintainers. Never present an entry, an issue or a
+message as coming from them. Read all of this before acting.
 
 1. **Never post to JuliaLang/julia or to a Julia standard library repository.**
    Julia maintainers asked on JuliaLang/julia#64133 (2026-11-13) that automated

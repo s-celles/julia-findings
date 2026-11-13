@@ -70,7 +70,12 @@ function prepare_sources(findings)
         destination = joinpath(GENERATED_FINDINGS, finding.slug)
         mkpath(destination)
         source = joinpath(FINDINGS_ROOT, finding.slug)
-        cp(joinpath(source, "README.md"), joinpath(destination, "index.md"))
+        issue = issue_number(finding.number)
+        issue_url = "https://github.com/s-celles/julia-findings/issues/$issue"
+        page = read(joinpath(source, "README.md"), String)
+        issue_link = "> **GitHub issue:** [s-celles/julia-findings#$issue]($issue_url)"
+        page = replace(page, "\n" => "\n\n$issue_link\n"; count = 1)
+        write(joinpath(destination, "index.md"), page)
         for script in finding.scripts
             cp(joinpath(source, script), joinpath(destination, script))
         end
@@ -80,7 +85,6 @@ function prepare_sources(findings)
             ["[$script](generated/findings/$(finding.slug)/$script)" for script in finding.scripts],
             ", ",
         )
-        issue = issue_number(finding.number)
         push!(rows, "| " * join((
             lpad(string(finding.number), 2, '0'),
             "[$(escape_cell(finding.title))]($entry)",
@@ -89,7 +93,7 @@ function prepare_sources(findings)
             escape_cell(finding.target),
             escape_cell(finding.status),
             scripts,
-            "[#$issue](https://github.com/s-celles/julia-findings/issues/$issue)",
+            "[#$issue]($issue_url)",
         ), " | ") * " |")
         push!(finding_pages, "$(lpad(string(finding.number), 2, '0')) — $(finding.title)" => entry)
     end
@@ -99,7 +103,7 @@ function prepare_sources(findings)
 
     This catalogue is generated from the entry directories in [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings). Use the search field to filter all columns, or select a column heading to sort it. Every linked Julia script is standalone and asserts the observed behavior.
 
-    | # | Finding | Area | Kind | Target | Status | Reproducer | Local issue |
+    | # | Finding | Area | Kind | Target | Status | Reproducer | GitHub issue |
     |---:|---|---|---|---|---|---|---|
     $(join(rows, "\n"))
 

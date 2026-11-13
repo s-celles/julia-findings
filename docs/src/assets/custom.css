@@ -47,6 +47,43 @@ html.theme--catppuccin-mocha {
     opacity: 0.75;
 }
 
+.table-summary,
+.table-pagination {
+    align-items: center;
+    display: flex;
+    gap: 0.65rem;
+}
+
+.table-summary {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.table-pagination button {
+    background: var(--documenter-background, #fff);
+    border: 1px solid var(--documenter-border-color, #d8d8d8);
+    border-radius: 0.4rem;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    padding: 0.38rem 0.62rem;
+}
+
+.table-pagination button:hover:not(:disabled),
+.table-pagination button:focus-visible {
+    border-color: #4063d8;
+}
+
+.table-pagination button:disabled {
+    cursor: default;
+    opacity: 0.42;
+}
+
+.table-page {
+    font-size: 0.88rem;
+    white-space: nowrap;
+}
+
 article table.interactive-table th {
     cursor: pointer;
     padding-right: 1.65rem;
@@ -95,5 +132,9 @@ article table.interactive-table td:first-child {
 
     .table-filter {
         min-width: 100%;
+    }
+
+    .table-summary {
+        justify-content: space-between;
     }
 }

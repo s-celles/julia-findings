@@ -1,0 +1,99 @@
+:root {
+    --landing-name-color: transparent;
+    --landing-name-background: linear-gradient(120deg, #9558b2 15%, #4063d8 52%, #389826 88%);
+    --landing-glow: linear-gradient(-45deg, rgb(149 88 178 / 55%) 50%, rgb(64 99 216 / 48%) 50%);
+    --landing-glow-filter: blur(54px);
+}
+
+html.theme--documenter-dark,
+html.theme--catppuccin-frappe,
+html.theme--catppuccin-macchiato,
+html.theme--catppuccin-mocha {
+    --landing-name-background: linear-gradient(120deg, #b47bcc 12%, #6684ea 52%, #55bd43 90%);
+    --landing-glow: linear-gradient(-45deg, rgb(85 189 67 / 52%) 50%, rgb(64 99 216 / 58%) 50%);
+}
+
+.landing-hero__image img {
+    filter: drop-shadow(0 16px 28px rgb(20 26 48 / 22%));
+}
+
+.table-tools {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    justify-content: space-between;
+    margin: 1rem 0 0.55rem;
+}
+
+.table-filter {
+    background: var(--documenter-background, #fff);
+    border: 1px solid var(--documenter-border-color, #d8d8d8);
+    border-radius: 0.45rem;
+    color: inherit;
+    font: inherit;
+    min-width: min(24rem, 100%);
+    padding: 0.58rem 0.75rem;
+}
+
+.table-filter:focus {
+    border-color: #4063d8;
+    box-shadow: 0 0 0 3px rgb(64 99 216 / 18%);
+    outline: none;
+}
+
+.table-count {
+    font-size: 0.88rem;
+    opacity: 0.75;
+}
+
+article table.interactive-table th {
+    cursor: pointer;
+    padding-right: 1.65rem;
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+}
+
+article table.interactive-table th::after {
+    content: "↕";
+    font-size: 0.78em;
+    opacity: 0.38;
+    position: absolute;
+    right: 0.55rem;
+}
+
+article table.interactive-table th[aria-sort="ascending"]::after {
+    content: "↑";
+    opacity: 0.95;
+}
+
+article table.interactive-table th[aria-sort="descending"]::after {
+    content: "↓";
+    opacity: 0.95;
+}
+
+article table.interactive-table tbody tr[hidden] {
+    display: none;
+}
+
+article table.interactive-table th,
+article table.interactive-table td {
+    text-align: left !important;
+}
+
+article table.interactive-table th:first-child,
+article table.interactive-table td:first-child {
+    text-align: right !important;
+}
+
+@media (max-width: 760px) {
+    .table-tools {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .table-filter {
+        min-width: 100%;
+    }
+}

@@ -28,3 +28,6 @@ the issue opened here. A person opens an upstream issue or pull request when
 an entry deserves a maintainer's attention, in their own words. Maintainers
 who ignore this repository lose nothing; those fixing an issue can find a
 prepared reproducer from the cross-reference.
+- findings that touch memory safety are not published here at all until a
+  person has triaged them and reported them privately
+  (security@julialang.org); publishing in a public repository is disclosure.

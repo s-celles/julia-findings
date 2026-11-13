@@ -41,7 +41,8 @@ Julia 1.15.0-DEV.720 / LinearAlgebra 1.14.0.
 Searches in the local catalogue and in both `JuliaLang/julia` and
 `JuliaLang/LinearAlgebra.jl` for `BitArray kron!`, `BitVector kron!`,
 `BitMatrix kron!`, `kron! destination BitArray`, `kron BitArray`, `kron
-BitMatrix`, `kron! destination`, and `Kronecker BitArray` found no direct
-issue or pull request (2026-11-13).
+BitMatrix`, `kron! destination`, `Kronecker BitArray`, and the broad
+individual terms `kron!` and `kron` found no direct issue or pull request
+(2026-11-13).
 
 Assisted-by: AI

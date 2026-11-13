@@ -5,6 +5,12 @@
 
 # Body
 
+> Disclosure note: this entry shows uninitialized memory being returned. The
+> behaviour was already public upstream before this entry existed
+> (JuliaLang/julia#53169, open since 2024, with a comment of 2026-03-26 showing
+> uninitialized values from `first(Iterators.cycle(Int[]), 5)`), so the entry
+> adds no new disclosure; see the memory-safety rule in AGENTS.md.
+
 Same root cause as `first(Iterators.cycle(Int[]), 5)` above (`IsInfinite`
 for an empty cycle, so the `length` of a `Take` or a `zip` is trusted and the
 output array is allocated but never filled), reached through other entry

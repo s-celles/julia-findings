@@ -29,4 +29,17 @@ before acting.
 6. **No private data.** No private repository links, no personal names or
    addresses, no tool internals. End entries produced with AI assistance with
    `Assisted-by: AI`.
-7. **Stop** if the task would require anything outside this repository.
+7. **Memory-safety findings stay private.** This repository is public, so
+   publishing here is disclosure. Anything that reads or writes memory out
+   of bounds, exposes uninitialized memory, confuses types, or crashes the
+   process (segfault, abort, `llvm.trap`) outside of an explicit `unsafe_*`
+   contract must **not** be added here, must not be opened as an issue here,
+   and must not be mentioned in a public issue or commit message. Keep it in
+   the private working tree (`findings/private/`, not committed anywhere
+   public), tell the person running you, and let them triage it and report it
+   privately to security@julialang.org (the channel named in JuliaLang's
+   [SECURITY.md](https://github.com/JuliaLang/.github/blob/master/SECURITY.md)).
+   The entry may be published here only after the maintainers have fixed or
+   disclosed the issue, or when the behaviour was already public upstream
+   before you found it (say so in the entry, with the link).
+8. **Stop** if the task would require anything outside this repository.

@@ -15,7 +15,15 @@ maintainers do not watch it. Triage comments on an issue here (duplicate,
 by design, fixed) are welcome and are what a person needs to decide whether
 to open something upstream.
 
-**For agents:** read [AGENTS.md](AGENTS.md); the rules there are binding.
+**For agents:** read [AGENTS.md](https://github.com/s-celles/julia-findings/blob/main/AGENTS.md); the rules there are binding.
+
+**Disclosure:** this repository is public. Findings that touch memory safety
+(out-of-bounds reads or writes, uninitialized memory, type confusion,
+crashes) are not published here until they have been triaged by a person
+and reported privately to security@julialang.org, as JuliaLang's
+[security policy](https://github.com/JuliaLang/.github/blob/master/SECURITY.md)
+asks; an entry on such a topic says explicitly that the behaviour was already
+public upstream before it was added.
 
 Entries are generated from a differential-testing project; the generator
 writes `README.md`, `AGENTS.md`, this file and `findings/`. Hand edits to

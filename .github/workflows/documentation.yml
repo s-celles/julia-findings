@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test interactive tables
+        run: node --test test/interactive-tables.test.js
       - uses: julia-actions/setup-julia@v2
         with:
           version: '1.13'

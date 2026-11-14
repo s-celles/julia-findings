@@ -19,11 +19,17 @@ html.theme--catppuccin-mocha {
 
 .table-tools {
     align-items: center;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: 0.65rem;
-    justify-content: space-between;
+    grid-template-columns: minmax(0, 1fr) auto;
     margin: 1rem 0 0.55rem;
+}
+
+.table-search-group {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    min-width: 0;
 }
 
 .table-filter {
@@ -31,8 +37,9 @@ html.theme--catppuccin-mocha {
     border: 1px solid var(--documenter-border-color, #d8d8d8);
     border-radius: 0.45rem;
     color: inherit;
+    flex: 1 1 20rem;
     font: inherit;
-    min-width: min(24rem, 100%);
+    min-width: 12rem;
     padding: 0.58rem 0.75rem;
 }
 
@@ -59,7 +66,7 @@ html.theme--catppuccin-mocha {
     justify-content: flex-end;
 }
 
-.table-pagination button {
+.table-tools button {
     background: var(--documenter-background, #fff);
     border: 1px solid var(--documenter-border-color, #d8d8d8);
     border-radius: 0.4rem;
@@ -69,12 +76,12 @@ html.theme--catppuccin-mocha {
     padding: 0.38rem 0.62rem;
 }
 
-.table-pagination button:hover:not(:disabled),
-.table-pagination button:focus-visible {
+.table-tools button:hover:not(:disabled),
+.table-tools button:focus-visible {
     border-color: #4063d8;
 }
 
-.table-pagination button:disabled {
+.table-tools button:disabled {
     cursor: default;
     opacity: 0.42;
 }
@@ -84,7 +91,51 @@ html.theme--catppuccin-mocha {
     white-space: nowrap;
 }
 
-article table.interactive-table th {
+.table-sort-panel {
+    align-items: center;
+    border-top: 1px solid var(--documenter-border-color, #d8d8d8);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    grid-column: 1 / -1;
+    padding-top: 0.6rem;
+}
+
+.table-sort-hint {
+    font-size: 0.84rem;
+    opacity: 0.78;
+}
+
+.table-sort-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.table-sort-key {
+    display: inline-flex;
+}
+
+.table-tools .table-sort-direction {
+    background: rgb(64 99 216 / 10%);
+    border-color: rgb(64 99 216 / 45%);
+    border-radius: 999px 0 0 999px;
+    padding-left: 0.72rem;
+}
+
+.table-tools .table-sort-remove {
+    border-left: 0;
+    border-radius: 0 999px 999px 0;
+    font-weight: 700;
+    padding-left: 0.48rem;
+    padding-right: 0.58rem;
+}
+
+.table-tools .table-clear-sort {
+    margin-left: auto;
+}
+
+article table.interactive-table thead tr:first-child > th {
     cursor: pointer;
     padding-right: 1.65rem;
     position: relative;
@@ -92,7 +143,7 @@ article table.interactive-table th {
     white-space: nowrap;
 }
 
-article table.interactive-table th::after {
+article table.interactive-table thead tr:first-child > th::after {
     content: "↕";
     font-size: 0.78em;
     opacity: 0.38;
@@ -100,14 +151,41 @@ article table.interactive-table th::after {
     right: 0.55rem;
 }
 
-article table.interactive-table th[aria-sort="ascending"]::after {
-    content: "↑";
+article table.interactive-table thead tr:first-child > th[data-sort-direction="ascending"]::after {
+    content: "↑" attr(data-sort-priority);
     opacity: 0.95;
 }
 
-article table.interactive-table th[aria-sort="descending"]::after {
-    content: "↓";
+article table.interactive-table thead tr:first-child > th[data-sort-direction="descending"]::after {
+    content: "↓" attr(data-sort-priority);
     opacity: 0.95;
+}
+
+article table.interactive-table thead tr:first-child > th[data-sort-direction] {
+    background: rgb(64 99 216 / 8%);
+}
+
+.table-column-filters th {
+    cursor: default;
+    padding: 0.38rem 0.28rem !important;
+}
+
+.table-column-filter {
+    background: var(--documenter-background, #fff);
+    border: 1px solid var(--documenter-border-color, #d8d8d8);
+    border-radius: 0.32rem;
+    color: inherit;
+    font: inherit;
+    font-size: 0.78rem;
+    min-width: 5.5rem;
+    padding: 0.34rem 0.4rem;
+    width: 100%;
+}
+
+.table-column-filter:focus {
+    border-color: #4063d8;
+    box-shadow: 0 0 0 2px rgb(64 99 216 / 18%);
+    outline: none;
 }
 
 article table.interactive-table tbody tr[hidden] {
@@ -124,17 +202,27 @@ article table.interactive-table td:first-child {
     text-align: right !important;
 }
 
+article table.interactive-table .table-column-filters th:first-child {
+    text-align: left !important;
+}
+
 @media (max-width: 760px) {
     .table-tools {
+        align-items: stretch;
+        grid-template-columns: 1fr;
+    }
+
+    .table-search-group {
         align-items: stretch;
         flex-direction: column;
     }
 
-    .table-filter {
-        min-width: 100%;
-    }
-
     .table-summary {
         justify-content: space-between;
+    }
+
+    .table-sort-panel,
+    .table-tools .table-clear-sort {
+        margin-left: 0;
     }
 }

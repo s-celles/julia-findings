@@ -32,7 +32,7 @@ features:
     link: /generated/contributing/
   - icon: 🔎
     title: Searchable
-    details: Filter the catalogue by operation, area, target, status, or exception, and sort every column in place.
+    details: Combine global and per-column filters, then rank findings with multi-column sorts whose keys have independent directions.
     link: /findings/
 ---
 ```

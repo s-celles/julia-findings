@@ -101,7 +101,7 @@ function prepare_sources(findings)
     catalogue = """
     # Findings
 
-    This catalogue is generated from the entry directories in [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings). Use the search field to filter all columns, or select a column heading to sort it. Every linked Julia script is standalone and asserts the observed behavior.
+    This catalogue is generated from the entry directories in [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings). Search all columns at once, or use the controls below each heading to combine column filters. Select a heading for a single-column sort; hold `Shift` while selecting additional headings to build a multi-column sort with an independent direction for each key. The numbered arrows show sort priority, and the controls above the table can reverse or remove any key. Every linked Julia script is standalone and asserts the observed behavior.
 
     | # | Finding | Area | Kind | Target | Status | Reproducer | GitHub issue |
     |---:|---|---|---|---|---|---|---|

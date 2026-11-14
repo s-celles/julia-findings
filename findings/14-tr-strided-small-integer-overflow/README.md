@@ -1,7 +1,7 @@
 # 14: `tr` silently wraps narrow integers depending on matrix storage
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1867](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1867))
 
 # Title
 

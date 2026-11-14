@@ -1,7 +1,7 @@
 # 15: Negating a Boolean unit triangular matrix throws `InexactError`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1868](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1868))
 
 # Title
 

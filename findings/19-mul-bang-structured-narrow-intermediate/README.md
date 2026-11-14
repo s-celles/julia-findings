@@ -1,7 +1,7 @@
 # 19: `mul!` into a wider destination: structured matrices wrap in the input type, dense matrices accumulate in the destination type
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1870](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1870))
 
 # Title
 

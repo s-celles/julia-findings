@@ -1,7 +1,7 @@
 # 17: Comment on JuliaLang/LinearAlgebra.jl#1707: The `Diagonal` fix appears to leave the same empty-trace problem in
 
 - Kind: comment for `JuliaLang/LinearAlgebra.jl#1707`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1707 (comment)](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1707#issuecomment-6873818039))
 
 The `Diagonal` fix appears to leave the same empty-trace problem in
 `SymTridiagonal`:

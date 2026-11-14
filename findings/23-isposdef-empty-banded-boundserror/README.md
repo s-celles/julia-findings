@@ -1,7 +1,7 @@
 # 23: `isposdef` of an empty `Bidiagonal`, `Tridiagonal` or `SymTridiagonal` throws `BoundsError`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1874](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1874))
 
 # Title
 

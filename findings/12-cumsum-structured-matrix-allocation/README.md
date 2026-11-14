@@ -1,7 +1,7 @@
 # 12: `cumsum` tries to store non-structured results in structured matrix wrappers
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1865](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1865))
 
 # Title
 

@@ -1,7 +1,7 @@
 # 22: Unit triangular integer `\` returns the integer element type and throws `InexactError` on overflow
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1873](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1873))
 
 # Title
 

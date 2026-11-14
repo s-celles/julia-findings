@@ -1,7 +1,7 @@
 # 25: `svdvals` of an integer `Diagonal` wraps on `typemin`, so `rank(Diagonal(Int8[-128])) == 0`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1875](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1875))
 
 # Title
 

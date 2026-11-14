@@ -1,7 +1,7 @@
 # 13: `sum(...; dims)` silently overflows narrow integers for banded matrices
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1866](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1866))
 
 # Title
 

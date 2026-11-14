@@ -1,7 +1,7 @@
 # 42: `transpose!(::BitMatrix, ::BitMatrix)` leaves old true bits in a nonzero destination
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1877](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1877))
 
 # Title
 

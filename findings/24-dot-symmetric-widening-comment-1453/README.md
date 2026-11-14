@@ -1,7 +1,7 @@
 # 24: Comment on JuliaLang/LinearAlgebra.jl#1453: A related inconsistency, in case the docstring is updated as suggested above
 
 - Kind: comment for `JuliaLang/LinearAlgebra.jl#1453`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1453 (comment)](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1453#issuecomment-6873818448))
 
 A related inconsistency, in case the docstring is updated as suggested above:
 the specialized `dot(::Symmetric, ::Symmetric)` and `dot(::Hermitian,

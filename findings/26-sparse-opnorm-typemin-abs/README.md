@@ -1,7 +1,7 @@
 # 26: `opnorm(A, 1)` / `opnorm(A, Inf)` on integer sparse matrices take `abs` before widening, so `typemin` entries are lost
 
 - Kind: issue for `JuliaSparse/SparseArrays.jl`
-- Status: not posted
+- Status: posted ([JuliaSparse/SparseArrays.jl#1177](https://github.com/JuliaSparse/SparseArrays.jl/issues/1177))
 
 # Title
 

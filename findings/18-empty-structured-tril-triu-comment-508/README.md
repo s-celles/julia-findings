@@ -1,7 +1,7 @@
 # 18: Comment on JuliaLang/LinearAlgebra.jl#508: The dense `0×0` examples are fixed, but the corresponding structured matrix
 
 - Kind: comment for `JuliaLang/LinearAlgebra.jl#508`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#508 (comment)](https://github.com/JuliaLang/LinearAlgebra.jl/issues/508#issuecomment-6873818251))
 
 The dense `0×0` examples are fixed, but the corresponding structured matrix
 methods still reject the main diagonal:

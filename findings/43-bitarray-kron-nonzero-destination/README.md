@@ -1,7 +1,7 @@
 # 43: `kron!` for `BitVector` and `BitMatrix` leaves stale true bits in zero result blocks
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1878](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1878))
 
 # Title
 

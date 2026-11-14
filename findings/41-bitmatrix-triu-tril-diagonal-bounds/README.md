@@ -1,7 +1,7 @@
 # 41: `triu` and `tril` reject valid diagonal offsets for `BitMatrix`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1876](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1876))
 
 # Title
 

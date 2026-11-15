@@ -1,7 +1,7 @@
 # 20: `Symmetric`/`Hermitian` integer matrices: `\`, `det` and `logabsdet` return `Rational{BigInt}` / `BigFloat`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1871](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1871))
+- Status: fixed upstream — JuliaLang/LinearAlgebra.jl#1871 closed by [PR #1882](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1882) (2026-11-15)
 
 # Title
 

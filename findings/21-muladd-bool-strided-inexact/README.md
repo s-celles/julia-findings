@@ -1,7 +1,7 @@
 # 21: `muladd` on `Matrix{Bool}` throws `InexactError` where `A*B + C` and the structured methods return `Int`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1872](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1872))
+- Status: fixed upstream — JuliaLang/LinearAlgebra.jl#1872 closed by [PR #1881](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1881) (2026-11-15)
 
 # Title
 

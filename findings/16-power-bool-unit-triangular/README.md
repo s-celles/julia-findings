@@ -1,7 +1,7 @@
 # 16: Integer powers of Boolean unit triangular matrices fail during conversion
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1869](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1869))
+- Status: fixed upstream — JuliaLang/LinearAlgebra.jl#1869 closed by [PR #1881](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1881) (2026-11-15)
 
 # Title
 

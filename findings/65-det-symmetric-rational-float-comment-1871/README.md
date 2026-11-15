@@ -1,7 +1,7 @@
 # 65: Comment on JuliaLang/LinearAlgebra.jl#1871: `det` of a `Symmetric`/`Hermitian` matrix with `Rational` elements returns an inexact `Float64`
 
 - Kind: comment for `JuliaLang/LinearAlgebra.jl#1871`
-- Status: not posted
+- Status: addressed upstream — JuliaLang/LinearAlgebra.jl#1871 closed by [PR #1882](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1882) (2026-11-15), which makes the Hermitian factorization always floating, so `det`/`inv`/`\` are now consistently `Float`; the inconsistency this entry reported is resolved (the result stays floating rather than becoming exact).
 
 # Body
 

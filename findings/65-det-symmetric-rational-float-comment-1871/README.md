@@ -41,3 +41,5 @@ Reproducer: `det_symmetric_rational_float.jl` (prints REPRODUCED when the
 determinant is not a `Rational`).
 
 Assisted-by: AI
+
+Reported upstream by the user: https://github.com/JuliaLang/LinearAlgebra.jl/issues/1871#issuecomment-6898878476 (the regression is confirmed; `inv` and `\` regress from exact `Rational` to `Float`, while `det` was already `Float`).

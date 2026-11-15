@@ -1,7 +1,7 @@
 # 65: Comment on JuliaLang/LinearAlgebra.jl#1871: `det` of a `Symmetric`/`Hermitian` matrix with `Rational` elements returns an inexact `Float64`
 
 - Kind: comment for `JuliaLang/LinearAlgebra.jl#1871`
-- Status: addressed upstream — JuliaLang/LinearAlgebra.jl#1871 closed by [PR #1882](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1882) (2026-11-15), which makes the Hermitian factorization always floating, so `det`/`inv`/`\` are now consistently `Float`; the inconsistency this entry reported is resolved (the result stays floating rather than becoming exact).
+- Status: the referenced fix (JuliaLang/LinearAlgebra.jl#1871 closed by [PR #1882](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1882), 2026-11-15) resolves the TYPE inconsistency by making the Hermitian/Symmetric factorization always FLOAT — but this is a regression for exact rational linear algebra: `Symmetric{Rational}` solves, `inv` and `det` now return `Float` instead of the exact `Rational` they returned before (e.g. `Symmetric(Rational{Int}[2 1; 1 2]) \ [1,1]` was `[1//3, 1//3]`, becomes `[0.333…37, 0.333…33]`). See `regression_1882_symmetric_rational_exactness.jl`. The exact-arithmetic use case is broken rather than fixed; a fallback keeping exact `lu` for non-float eltypes would preserve it.
 
 # Body
 

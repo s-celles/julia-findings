@@ -1,7 +1,7 @@
 # 71: Comment on JuliaLang/LinearAlgebra.jl#601: `\` and `inv` of a `SymTridiagonal` with `Rational` elements use an unpivoted factorization, throwing on an invertible matrix and returning `1//0` on a singular one
 
 - Kind: comment for `JuliaLang/LinearAlgebra.jl#601`
-- Status: not posted
+- Status: posted (comment on [JuliaLang/LinearAlgebra.jl#601](https://github.com/JuliaLang/LinearAlgebra.jl/issues/601#issuecomment-6972835673))
 
 # Body
 

@@ -1,7 +1,7 @@
 # 74: `eigen` of a lower `Bidiagonal` returns `NaN` eigenvectors (eigenvalues correct); an integer upper `Bidiagonal` throws `InexactError`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1900](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1900))
 
 # Body
 

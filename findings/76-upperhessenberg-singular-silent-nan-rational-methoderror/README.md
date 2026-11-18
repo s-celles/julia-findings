@@ -1,7 +1,7 @@
 # 76: `UpperHessenberg \ b` on a singular matrix returns `NaN` silently, and `UpperHessenberg{Rational} \ b` throws `MethodError(givensAlgorithm)` — regression in LinearAlgebra 1.13
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1902](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1902))
 
 # Body
 

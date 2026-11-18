@@ -1,7 +1,7 @@
 # 70: `\` on a sparse matrix with `Rational` elements returns Float64 results converted to `Rational` (silently inexact) or throws `InexactError`
 
 - Kind: issue for `JuliaSparse/SparseArrays.jl`
-- Status: not posted
+- Status: posted ([JuliaSparse/SparseArrays.jl#1179](https://github.com/JuliaSparse/SparseArrays.jl/issues/1179)); on nightly 1.15.0-DEV.833 the sparse `\` is exact again (fixed on master, issue still open as of 2026-11-18)
 
 # Body
 

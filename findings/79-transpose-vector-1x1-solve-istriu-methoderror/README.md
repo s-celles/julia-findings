@@ -1,7 +1,7 @@
 # 79: `transpose(v) \ b` and `v' \ b` with a length-1 vector throw `MethodError: istriu(::Vector, ::Int)` instead of solving the 1×1 system
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1906](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1906))
 
 # Body
 
@@ -37,8 +37,8 @@ tests the left-hand side for triangularity with `istriu`/`istril` to pick a fast
 solve. For n ≥ 2 the wrapper is not square, the triangular check is skipped, and the least-squares
 path works. Triggered for `Float64` and `ComplexF64`.
 
-Versions checked: reproduced on LinearAlgebra with Julia 1.10.11, 1.11.9, 1.12.6 and 1.13.3
-(long-standing).
+Versions checked: reproduced on LinearAlgebra with Julia 1.10.11, 1.11.9, 1.12.6, 1.13.3 and nightly 1.15.0-DEV.833 (LinearAlgebra
+1.14.0) — long-standing and still present on master.
 
 Deduplication searches (2026-11-18): in this catalogue, `transpose vector solve istriu` matches nothing.
 Upstream `JuliaLang/LinearAlgebra.jl`, `istriu Vector backslash transpose covector`, `ldiv Transpose

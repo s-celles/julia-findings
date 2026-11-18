@@ -1,7 +1,7 @@
 # 78: `sum` and `prod` of an empty `Adjoint`/`Transpose` throw, where the materialized empty array and every other lazy wrapper return the neutral element
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1905](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1905))
 
 # Body
 
@@ -37,8 +37,8 @@ specialization that supplies the empty-case initial value (`mapreduce_empty` / `
 falls through to the generic iterator reduction, which refuses an empty collection. On Julia 1.10 the
 failure surfaces as a `MethodError` instead of the `ArgumentError`.
 
-Versions checked: reproduced on LinearAlgebra with Julia 1.10.11, 1.11.9, 1.12.6 and 1.13.3
-(long-standing).
+Versions checked: reproduced on LinearAlgebra with Julia 1.10.11, 1.11.9, 1.12.6, 1.13.3 and nightly 1.15.0-DEV.833 (LinearAlgebra
+1.14.0) — long-standing and still present on master.
 
 Deduplication searches (2026-11-18): in this catalogue, `empty adjoint sum reduce` and `empty`
 match only unrelated empty-input entries (`diff`, `isposdef`, `median`). Upstream

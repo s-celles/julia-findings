@@ -1,7 +1,7 @@
 # 77: `det` and `logabsdet` of a square `Rational` sparse matrix lose exactness (routed through UMFPACK/`Float64`); `Rational{BigInt}` throws
 
 - Kind: issue for `JuliaSparse/SparseArrays.jl`
-- Status: not posted
+- Status: posted ([JuliaSparse/SparseArrays.jl#1184](https://github.com/JuliaSparse/SparseArrays.jl/issues/1184))
 
 # Body
 
@@ -46,8 +46,10 @@ stay exact. This is the `det`/`logabsdet` face of the sparse `\` Rational inexac
 JuliaSparse/SparseArrays.jl#1179 (catalogue entry 70): same root (sparse factorization limited to BLAS
 floats), distinct operation.
 
-Versions checked: reproduced on SparseArrays with Julia 1.10.11, 1.11.9, 1.12.6 and 1.13.3
-(long-standing).
+Versions checked: reproduced on SparseArrays with Julia 1.10.11, 1.11.9, 1.12.6, 1.13.3 and nightly
+1.15.0-DEV.833 (SparseArrays 1.14.0). Note that on the same nightly the sparse `\` of entry 70 /
+JuliaSparse/SparseArrays.jl#1179 is now exact (`S \ b` returns `Rational{Int}[7//31, 17//31, 4//31, 60//31]`),
+so `det`/`logabsdet` are the remaining exact-arithmetic gap on master.
 
 Deduplication searches (2026-11-18): in this catalogue, the Rational-sparse mechanism is entry 70 (the
 `\` solve). Upstream `JuliaSparse/SparseArrays.jl` searches for `det rational`, `logabsdet`,

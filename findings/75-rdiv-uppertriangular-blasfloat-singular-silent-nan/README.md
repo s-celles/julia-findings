@@ -1,7 +1,7 @@
 # 75: Right division by a singular `UpperTriangular{<:BlasFloat}` returns `NaN`/`Inf` silently, where `U \ b`, the generic path and the dense path raise `SingularException`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1901](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1901))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1901](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1901)); closed not planned — already fixed on v1.14 by [JuliaLang/LinearAlgebra.jl#1529](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1529), backport undecided
 
 # Body
 

@@ -1,7 +1,7 @@
 # 72: `Matrix(F::BunchKaufman)` reconstructs a complex *symmetric* matrix wrongly — `AbstractMatrix(::BunchKaufman)` uses the adjoint where the symmetric case needs the transpose
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1898](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1898))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1898](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1898)); fixed upstream by [JuliaLang/LinearAlgebra.jl#1903](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1903) (closed 2026-11-18)
 
 # Body
 

@@ -1,7 +1,7 @@
 # 81: `rmul!(B::AbstractMatrix, A::Bidiagonal)` throws `DimensionMismatch` for a valid rectangular `B` (the size check has its arguments reversed)
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1908](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1908))
 
 # Body
 

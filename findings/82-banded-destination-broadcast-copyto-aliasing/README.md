@@ -1,7 +1,7 @@
 # 82: broadcasting or `copyto!` into a banded matrix that aliases its source gives wrong values (`T .= T'`, `copyto!(T, T')`, `D .= Diagonal(view(D.diag, end:-1:1))`)
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1909](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1909))
 
 # Body
 

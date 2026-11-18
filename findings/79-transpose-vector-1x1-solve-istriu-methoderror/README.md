@@ -1,7 +1,7 @@
 # 79: `transpose(v) \ b` and `v' \ b` with a length-1 vector throw `MethodError: istriu(::Vector, ::Int)` instead of solving the 1×1 system
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1906](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1906))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1906](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1906)); fix proposed in [JuliaLang/LinearAlgebra.jl#1916](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1916) (open, 2026-11-18)
 
 # Body
 

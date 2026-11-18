@@ -1,7 +1,7 @@
 # 84: a `SymTridiagonal` with a `NaN` off-diagonal entry cannot be broadcast at all (`S .* 2` throws "broadcasted assignment breaks symmetry")
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1911](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1911))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1911](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1911)); fix proposed in [JuliaLang/LinearAlgebra.jl#1914](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1914) (open, 2026-11-18)
 
 # Body
 

@@ -1,7 +1,7 @@
 # 78: `sum` and `prod` of an empty `Adjoint`/`Transpose` throw, where the materialized empty array and every other lazy wrapper return the neutral element
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1905](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1905))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1905](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1905)); fix proposed in [JuliaLang/LinearAlgebra.jl#1917](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1917) (open, 2026-11-18)
 
 # Body
 

@@ -1,7 +1,7 @@
 # 91: `istriu`, `istril` and `isbanded` of an empty `UnitUpperTriangular`/`UnitLowerTriangular` return `false` for offsets beyond the diagonal, where the dense answer is (vacuously) `true` — regression in LinearAlgebra 1.13
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1923](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1923))
 
 # Body
 

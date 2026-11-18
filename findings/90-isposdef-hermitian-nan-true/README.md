@@ -1,7 +1,7 @@
 # 90: `isposdef` of a `Symmetric`/`Hermitian` matrix containing `NaN` returns `true` (LAPACK `potrf` does not flag a `NaN` pivot), where the dense, `Diagonal` and generic paths return `false`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1922](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1922))
 
 # Body
 

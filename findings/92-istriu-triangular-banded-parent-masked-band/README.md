@@ -1,7 +1,7 @@
 # 92: `istriu`/`istril` of an `UpperTriangular`/`LowerTriangular` wrapping a banded matrix examine the band the wrapper masks (`istriu(UpperTriangular(Tridiagonal([1],[0,0],[0])), 1)` is `false` on an all-zero matrix) — regression in LinearAlgebra 1.12
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1924](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1924))
 
 # Body
 

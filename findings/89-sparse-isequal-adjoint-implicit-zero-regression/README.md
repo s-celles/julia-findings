@@ -1,7 +1,7 @@
 # 89: `isequal` between a sparse matrix and a lazy sparse adjoint/transpose is wrong on the nightly (implicit zero conjugated, real vs complex), and `isequal` is true while the hashes differ — regression after SparseArrays.jl#985
 
 - Kind: issue for `JuliaSparse/SparseArrays.jl`
-- Status: not posted
+- Status: posted ([JuliaSparse/SparseArrays.jl#1185](https://github.com/JuliaSparse/SparseArrays.jl/issues/1185))
 
 # Body
 

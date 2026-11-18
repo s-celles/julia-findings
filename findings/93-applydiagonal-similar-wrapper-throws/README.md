@@ -1,7 +1,7 @@
 # 93: the `isdiag` fast path of the dense matrix functions writes into `similar(A)` and throws for a `UnitUpperTriangular`, a complex `Symmetric` or a `SymTridiagonal` (`sin(UnitUpperTriangular([1.0 0; 0 1]))` throws `ArgumentError`) — regression in LinearAlgebra 1.12
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: to post
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1925](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1925))
 
 # Body
 

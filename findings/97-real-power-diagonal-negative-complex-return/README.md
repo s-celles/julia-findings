@@ -1,7 +1,7 @@
 # 97: `A^p` for a real diagonal dense matrix with a negative entry and an integer-valued `Float64` exponent returns a `ComplexF64` matrix (`[-1.0 0; 0 2]^2.0`), while the non-diagonal matrix, `Diagonal` and Julia 1.12 return `Float64` — regression in LinearAlgebra 1.13
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: to post
+- Status: not filed as an issue (trivial one-line fix, per the LinearAlgebra.jl#1912 guidance); fix with test prepared as a pull request, pending
 
 # Body
 

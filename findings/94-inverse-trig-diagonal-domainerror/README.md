@@ -1,7 +1,7 @@
 # 94: `acos`/`asin`/`acosh`/`atanh` of a real diagonal dense matrix with entries outside the real domain throw `DomainError` instead of returning the complex principal value (`acosh([0.5 0; 0 2.0])` throws, `acosh([0.5 1; 0 2.0])` does not) — regression in LinearAlgebra 1.12
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: to post
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1926](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1926))
 
 # Body
 

@@ -1,7 +1,7 @@
 # 88: scaling, `triu`, `svdvals`, products and `± I` on triangular/symmetric wrappers of a structured parent throw "cannot set off-diagonal entry" (regressions in LinearAlgebra 1.11 and 1.12)
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1921](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1921))
 
 # Body
 

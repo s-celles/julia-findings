@@ -1,7 +1,7 @@
 # 86: `triu` and `tril` of a complex `Hermitian` keep the imaginary part of the stored diagonal, which the wrapper itself exposes as real
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1919](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1919))
 
 # Body
 

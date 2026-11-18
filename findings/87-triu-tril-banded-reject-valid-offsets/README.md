@@ -1,7 +1,7 @@
 # 87: `triu` and `tril` of `Diagonal`, `Bidiagonal`, `Tridiagonal` and `SymTridiagonal` reject valid diagonal offsets (asymmetric bounds), where the dense methods accept any offset
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1920](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1920))
 
 # Body
 

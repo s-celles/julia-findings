@@ -1,7 +1,7 @@
 # 85: `copy`, `conj` and `real` of a `Symmetric`/`Hermitian` wrapping a unit-triangular matrix use the parent's stored diagonal — wrong values, and an uninitialized diagonal for `copy` (regression since LinearAlgebra 1.11)
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1918](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1918))
 
 # Body
 

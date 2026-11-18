@@ -1,7 +1,7 @@
 # 66: `ldiv!(A::Tridiagonal, B)` silently overwrites `A` with its LU factors; the `ldiv!` docstring does not say so
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl` (documentation)
-- Status: not posted
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1894](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1894)); closed by design (2026-11-17) — the `ldiv!(::Tridiagonal, B)` method docstring (Julia 1.11+) states that the diagonals of `A` are overwritten, so the mutation is intentional; this entry's claim that the docstring does not say so was wrong for that method
 
 # Body
 

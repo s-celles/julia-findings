@@ -1,7 +1,7 @@
 # 09: Comment on JuliaSparse/SparseArrays.jl: In current SparseArrays, `diff` on sparse Boolean arrays either throws or
 
 - Kind: issue for `JuliaSparse/SparseArrays.jl`
-- Status: posted ([JuliaSparse/SparseArrays.jl#1175](https://github.com/JuliaSparse/SparseArrays.jl/issues/1175))
+- Status: fixed upstream — JuliaSparse/SparseArrays.jl#1175 closed by [PR #1183](https://github.com/JuliaSparse/SparseArrays.jl/pull/1183) (2026-11-18)
 
 # `diff` on sparse Bool arrays does not promote its result to Int
 

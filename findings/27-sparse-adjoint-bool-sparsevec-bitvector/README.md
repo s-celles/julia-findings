@@ -1,7 +1,7 @@
 # 27: `SparseMatrixCSC(x')` for a `SparseVector{Bool}` fails (`BitVector` as `nzval`), which breaks broadcasting with `x'`
 
 - Kind: issue for `JuliaSparse/SparseArrays.jl`
-- Status: posted ([JuliaSparse/SparseArrays.jl#1178](https://github.com/JuliaSparse/SparseArrays.jl/issues/1178))
+- Status: fixed upstream — JuliaSparse/SparseArrays.jl#1178 closed by [PR #1181](https://github.com/JuliaSparse/SparseArrays.jl/pull/1181) (2026-11-18)
 
 # Title
 

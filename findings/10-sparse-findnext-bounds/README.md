@@ -1,7 +1,7 @@
 # 10: Comment on JuliaSparse/SparseArrays.jl: The optimized search methods for sparse vectors can return a match when the
 
 - Kind: issue for `JuliaSparse/SparseArrays.jl`
-- Status: posted ([JuliaSparse/SparseArrays.jl#1176](https://github.com/JuliaSparse/SparseArrays.jl/issues/1176))
+- Status: fixed upstream — JuliaSparse/SparseArrays.jl#1176 closed by [PR #1182](https://github.com/JuliaSparse/SparseArrays.jl/pull/1182) (2026-11-18)
 
 # Sparse `findnext` and `findprev` accept invalid starting indices
 

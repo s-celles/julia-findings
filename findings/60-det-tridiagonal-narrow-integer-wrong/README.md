@@ -1,7 +1,7 @@
 # 60: `det` of `Tridiagonal` and `SymTridiagonal` matrices with narrow integer elements returns a value that is neither exact nor wrapped
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: fixed upstream — JuliaLang/LinearAlgebra.jl#1893 closed by [PR #1895](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1895) (2026-11-17)
 
 # Body
 

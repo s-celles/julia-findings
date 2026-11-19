@@ -1,7 +1,7 @@
 # 95: `cbrt` of an integer `UpperTriangular`/`LowerTriangular` keeps the integer element type and throws `InexactError` (`cbrt(UpperTriangular([2 1; 0 3]))`), while the dense, `Diagonal` and `Symmetric` methods return `Float64`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not filed as an issue (trivial one-line fix, per the LinearAlgebra.jl#1912 guidance); fix with test prepared as a pull request, pending
+- Status: not filed as an issue (trivial one-line fix, per the LinearAlgebra.jl#1912 guidance); fix proposed in [JuliaLang/LinearAlgebra.jl#1928](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1928) (open, 2026-11-19)
 
 # Body
 

@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Alignment with the shared [site-kit](https://github.com/s-celles/site-kit)
+  specification v0.2: a Statuses page with status badges and a consistent tone
+  per word, an Upstream page listing the cited issues and pull requests by
+  repository, a server-rendered History time-series chart (static SVG enhanced
+  by the shared `viz.js`), the shared menu order, and `site-kit.css`/`viz.js`.
+- CI now checks the built site against the SPEC (`check_site.py`) and that the
+  build is deterministic (`compare_builds.py`).
+
 - `llms.txt` and `llms-full.txt` at the site root, and a `CITATION.cff` with a
   citation on the home page, for machine-readable and citable use (site-kit
   SK-LLMS, SK-HOME-CITE).

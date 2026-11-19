@@ -33,6 +33,15 @@ jobs:
         run: julia --project=docs -e 'using Pkg; Pkg.instantiate()'
       - name: Build documentation
         run: julia --project=docs docs/make.jl
+      - name: Check the site against the site-kit SPEC
+        run: |
+          git clone --depth 1 --branch v0.2.0 https://github.com/s-celles/site-kit.git /tmp/site-kit
+          python3 -I /tmp/site-kit/tools/check_site.py --site docs/build --config site-kit.json --repo .
+      - name: Check the build is deterministic
+        run: |
+          cp -r docs/build /tmp/build-a
+          julia --project=docs docs/make.jl
+          python3 -I /tmp/site-kit/tools/compare_builds.py /tmp/build-a docs/build --config site-kit.json
       - name: Configure GitHub Pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5

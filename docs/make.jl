@@ -148,60 +148,69 @@ end
 
 function build_history(findings)
     dates = sort(unique(finding_date(f.slug) for f in findings))
+    n = length(dates)
     dindex = Dict(d => i for (i, d) in enumerate(dates))
-    present = [a for a in HISTORY_AREAS if any(f -> f.area == a, findings)]
-    added = Dict(a => zeros(Int, length(dates)) for a in present)
+    addTot = zeros(Int, n); addRep = zeros(Int, n)
     for f in findings
-        added[f.area][dindex[finding_date(f.slug)]] += 1
+        i = dindex[finding_date(f.slug)]
+        addTot[i] += 1
+        status_word(f.status) == "posted" && (addRep[i] += 1)
     end
-    total = length(findings)
-    reported = count(f -> startswith(strip(f.status), "posted"), findings)
-    span = length(dates) == 1 ? dates[1] : "$(first(dates)) → $(last(dates))"
+    cumTot = cumsum(addTot); cumRep = cumsum(addRep)
+    total = cumTot[end]; reported = cumRep[end]
+    ncomp = length(unique(f.area for f in findings))
+    span = n == 1 ? dates[1] : "$(first(dates)) → $(last(dates))"
 
-    # cumulative-by-area table (accessible fallback) and the embedded JSON for the charts
-    cum = Dict(a => cumsum(added[a]) for a in present)
-    header = "| Date | " * join(present, " | ") * " | Total |"
-    sep = "|---|" * repeat("---:|", length(present) + 1)
-    rows = String[]
+    ymax = maximum(cumTot)
+    step = let raw = ymax / 4, mag = 10.0^floor(log10(max(raw, 1)))
+        Int(round((raw / mag >= 5 ? 5 : raw / mag >= 2 ? 2 : 1) * mag))
+    end
+    ticks = collect(0:step:(ymax + step - 1))
+    ytop = max(ticks[end], 1)
+    md(d) = d[6:end]
+    xof(i) = 60 + (n == 1 ? 0.0 : (i - 1) * 640 / (n - 1))
+    yof(v) = 174 - (v / ytop) * 160
+    r1(x) = round(x; digits = 1)
+
+    io = IOBuffer()
+    print(io, "<figure class=\"viz\"><svg class=\"viz-chart\" data-viz=\"dense\" tabindex=\"0\" viewBox=\"0 0 760 210\" role=\"img\" aria-label=\"Cumulative findings and upstream reports over time, $(first(dates)) to $(last(dates))\">")
+    for t in ticks
+        y = r1(yof(t))
+        print(io, "<line class=\"viz-grid\" x1=\"44\" x2=\"700\" y1=\"$(y)\" y2=\"$(y)\"/><text class=\"viz-tick\" x=\"38\" y=\"$(y + 4)\" text-anchor=\"end\">$(t)</text>")
+    end
+    print(io, "<line class=\"viz-axis\" x1=\"44\" x2=\"700\" y1=\"174\" y2=\"174\"/>")
     for (i, d) in enumerate(dates)
-        tot = sum(cum[a][i] for a in present)
-        push!(rows, "| $d | " * join((string(cum[a][i]) for a in present), " | ") * " | $tot |")
+        print(io, "<text class=\"viz-tick\" x=\"$(r1(xof(i)))\" y=\"192\" text-anchor=\"middle\">$(md(d))</text>")
     end
+    for (label, series, var) in (("findings", cumTot, "--viz-1"), ("reported", cumRep, "--viz-2"))
+        path = join(("$(j == 1 ? "M" : "L")$(r1(xof(j))),$(r1(yof(v)))" for (j, v) in enumerate(series)), " ")
+        print(io, "<path class=\"viz-line\" style=\"stroke:var($(var))\" d=\"$(path)\"/>")
+        for (i, v) in enumerate(series)
+            cx = r1(xof(i)); cy = r1(yof(v))
+            print(io, "<g class=\"viz-pt\" data-x-label=\"$(dates[i])\" aria-label=\"$(dates[i]), $(label): $(v)\"><circle class=\"viz-hit\" cx=\"$(cx)\" cy=\"$(cy)\" r=\"9\"/><circle class=\"viz-dot\" style=\"fill:var($(var))\" cx=\"$(cx)\" cy=\"$(cy)\" r=\"4\"/></g>")
+        end
+        print(io, "<text class=\"viz-label\" x=\"670\" y=\"$(r1(yof(series[end])))\">$(label) $(series[end])</text>")
+    end
+    print(io, "</svg><figcaption>Cumulative findings and upstream reports (y from 0). Tab to the chart, then use the arrow keys.</figcaption></figure>")
+    svg = String(take!(io))
 
-    added_json = "{" * join(
-        ("$(json_str(a)):[" * join(added[a], ",") * "]" for a in present), ",") * "}"
-    data_json = "{" *
-        "\"dates\":[" * join((json_str(d) for d in dates), ",") * "]," *
-        "\"areas\":[" * join((json_str(a) for a in present), ",") * "]," *
-        "\"addedByArea\":$added_json," *
-        "\"total\":$total,\"reported\":$reported}"
-
+    tablerows = join(("| $(dates[i]) | $(cumTot[i]) | $(cumRep[i]) |" for i in 1:n), "\n")
     page = """
     # History
 
-    $(data_stamp())
-    How the catalogue has grown over time. Each entry is dated by the first commit that added it to
-    [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings); the chart stacks the
-    cumulative count by Julia component. See the full list on the [Findings](findings.md) page.
+    $(data_stamp())How the catalogue has grown over time. Each entry is dated by the first commit that added it to [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings). The chart tracks the cumulative number of findings and of findings reported upstream.
 
     ```@raw html
-    <div class="jf-stat-row">
-      <div class="jf-stat"><span class="jf-stat-value">$total</span><span class="jf-stat-label">findings</span></div>
-      <div class="jf-stat"><span class="jf-stat-value">$(length(present))</span><span class="jf-stat-label">components</span></div>
-      <div class="jf-stat"><span class="jf-stat-value">$reported</span><span class="jf-stat-label">reported upstream</span></div>
-      <div class="jf-stat"><span class="jf-stat-value jf-stat-span">$span</span><span class="jf-stat-label">catalogue span</span></div>
-    </div>
-    <div id="jf-history-charts" class="jf-history-charts"></div>
-    <script type="application/json" id="jf-history-data">$data_json</script>
+    <div class="sk-stats"><a class="sk-stat" href="findings/"><strong>$(total)</strong><span>findings</span></a><a class="sk-stat" href="findings/"><strong>$(ncomp)</strong><span>components</span></a><a class="sk-stat" href="upstream/"><strong>$(reported)</strong><span>reported upstream</span></a><a class="sk-stat" href="history/"><strong>$(span)</strong><span>catalogue span</span></a></div>
+
+    $(svg)
     ```
 
-    ## Cumulative findings by component
+    ## Cumulative totals
 
-    The chart above is generated from this table; the figures are cumulative totals at each date.
-
-    $header
-    $sep
-    $(join(rows, "\n"))
+    | Date | Findings | Reported upstream |
+    |---|---:|---:|
+    $(tablerows)
     """
     write(joinpath(@__DIR__, "src", "history.md"), page)
     return nothing
@@ -251,11 +260,92 @@ function build_llms(findings)
     return nothing
 end
 
+# Canonical status word for a finding's Status line, and its badge tone (SPEC §5).
+const STATUS_TONES = Dict(
+    "not posted" => "neutral",
+    "posted" => "info",
+    "fixed on nightly" => "good",
+    "by design" => "warn",
+    "duplicate" => "alt",
+)
+const STATUS_MEANINGS = [
+    "posted" => "An upstream report (issue or pull request) exists for this finding.",
+    "fixed on nightly" => "The behavior is already fixed on an official Julia nightly.",
+    "by design" => "The behavior is intended; the entry documents the sharp edge.",
+    "duplicate" => "The same behavior is recorded by an existing upstream report.",
+    "not posted" => "The finding exists only in this catalogue; a person has not taken it upstream.",
+]
+function status_word(status)
+    s = lowercase(strip(status))
+    startswith(s, "not posted") && return "not posted"
+    startswith(s, "fixed on nightly") && return "fixed on nightly"
+    startswith(s, "by design") && return "by design"
+    startswith(s, "duplicate") && return "duplicate"
+    startswith(s, "posted") && return "posted"
+    (occursin("fix proposed", s) || occursin(r"\.jl#\d", s) || occursin("pull request", s)) && return "posted"
+    return "not posted"
+end
+badge(word) = "<span class=\"sk-badge sk-tone--$(get(STATUS_TONES, word, "neutral"))\" data-status=\"$(word)\">$(word)</span>"
+
+function build_statuses()
+    rows = ["$(badge(w))\n: $(m)\n" for (w, m) in STATUS_MEANINGS]
+    page = """
+    # Statuses
+
+    $(data_stamp())Every finding carries a status. Its badge always shows the word, so no meaning rests on color alone; the raw word is in `data-status` for filtering.
+
+    ```@raw html
+    <dl class="sk-status-list">
+    $(join(("<dt>$(badge(w))</dt><dd>$(m)</dd>" for (w, m) in STATUS_MEANINGS), "\n"))
+    </dl>
+    ```
+
+    See the [Findings](findings.md) table to filter by status, and the [Upstream](upstream.md) page for the reports themselves.
+    """
+    write(joinpath(@__DIR__, "src", "statuses.md"), page)
+    return nothing
+end
+
+function build_upstream(findings)
+    # collect (repo, kind, number) references from each finding's Status line
+    refs = Dict{String, Vector{Tuple{String, Int, Finding}}}()  # repo => [(kind, number, finding)]
+    rx = r"github\.com/([\w.\-]+/[\w.\-]+)/(issues|pull)/(\d+)"
+    for f in findings
+        for m in eachmatch(rx, f.status)
+            repo, kindw, num = m.captures[1], m.captures[2], parse(Int, m.captures[3])
+            kind = kindw == "pull" ? "pull request" : "issue"
+            push!(get!(refs, repo, Tuple{String, Int, Finding}[]), (kind, num, f))
+        end
+    end
+    secs = String[]
+    for repo in sort(collect(keys(refs)))
+        rows = String[]
+        for (kind, num, f) in sort(refs[repo]; by = t -> t[2])
+            url = "https://github.com/$repo/$(kind == "pull request" ? "pull" : "issues")/$num"
+            entry = "generated/findings/$(f.slug)/index.md"
+            push!(rows, "| [#$num]($url) | $kind | [$(lpad(f.number, 2, '0')): $(escape_cell(first(f.title, 70)))]($entry) |")
+        end
+        push!(secs, "## $repo\n\n| Reference | Kind | Finding |\n|---|---|---|\n$(join(rows, "\n"))\n")
+    end
+    total = sum(length(v) for v in values(refs); init = 0)
+    page = """
+    # Upstream
+
+    $(data_stamp())$(total) upstream references (issues and pull requests) cited by the catalogue, by repository. A closed issue does not prove that a fix reached a release.
+
+    $(join(secs, "\n"))
+    """
+    write(joinpath(@__DIR__, "src", "upstream.md"), page)
+    return nothing
+end
+
 finding_dirs = sort(filter(path -> isdir(path) && isfile(joinpath(path, "README.md")),
     readdir(FINDINGS_ROOT; join = true)))
 findings = sort(read_finding.(finding_dirs); by = finding -> finding.number)
 finding_pages = prepare_sources(findings)
 build_history(findings)
+build_statuses()
+build_upstream(findings)
 
 makedocs(
     sitename = "Julia findings",
@@ -268,7 +358,7 @@ makedocs(
         edit_link = nothing,
         inventory_version = "dev",
         prettyurls = get(ENV, "CI", "false") == "true",
-        assets = ["assets/custom.css", "assets/interactive-tables.js", "assets/history-charts.js"],
+        assets = ["assets/site-kit.css", "assets/custom.css", "assets/interactive-tables.js", "assets/viz.js"],
         repolink = "https://github.com/s-celles/julia-findings",
         size_threshold = 2_000_000,
     ),
@@ -279,8 +369,10 @@ makedocs(
     pages = [
         "Home" => "index.md",
         "Findings" => "findings.md",
+        "Upstream" => "upstream.md",
         "History" => "history.md",
-        "How we test" => "methodology.md",
+        "Methodology" => "methodology.md",
+        "Statuses" => "statuses.md",
         "Contributing" => "generated/contributing.md",
         "Agent policy" => "generated/AGENTS.md",
         (hide(page) for page in finding_pages)...,
@@ -288,3 +380,13 @@ makedocs(
 )
 
 build_llms(findings)
+
+# Post-build: give the home page's data stamp the `.data-stamp` class (SK-HOME-STAMP). Documenter escapes
+# raw HTML inside @eval, so the stamp is emitted as a Markdown paragraph and the class is added here.
+let home = joinpath(@__DIR__, "build", "index.html")
+    if isfile(home)
+        html = read(home, String)
+        html = replace(html, "<p>Data at commit <code>" => "<p class=\"data-stamp\">Data at commit <code>")
+        write(home, html)
+    end
+end

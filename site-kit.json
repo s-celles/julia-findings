@@ -1,0 +1,9 @@
+{
+  "spec": "0.2",
+  "menu": ["Findings", "Upstream", "History", "Methodology", "Search"],
+  "omit": {},
+  "volatile": [
+    "<span class=\"colophon-date\"[^>]*>[^<]*</span>",
+    "\"generation_timestamp\":\"[^\"]*\""
+  ]
+}

@@ -66,3 +66,7 @@ prepared reproducer from the cross-reference.
 - findings that touch memory safety are not published here at all until a
   person has triaged them and reported them privately
   (security@julialang.org); publishing in a public repository is disclosure.
+
+## Site structure
+
+This site follows the shared [site-kit](https://github.com/s-celles/site-kit) specification, version 0.2 (tag `v0.2.0`): a common structure, statuses, upstream and history pages across related projects.

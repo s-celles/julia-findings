@@ -1,7 +1,7 @@
 # 98: `svd` of a lower `Bidiagonal` with finite entries never returns on x86_64 (`svd(Bidiagonal([1.0, floatmax(), 3.0], [2.0, floatmax()], :L))` loops forever in LAPACK `dbdsqr`), while the upper form, the dense matrix, `svdvals`, Julia 1.10 and aarch64 return — the finite input bypasses the Inf/NaN checks of #1798
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: to post
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1927](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1927))
 
 # Body
 

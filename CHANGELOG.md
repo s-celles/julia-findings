@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- History page with an interactive time-series chart of the catalogue's growth,
+  stacking cumulative findings by Julia component, with a stat summary and an
+  accessible cumulative table. Entry dates come from each finding's first commit.
+- JavaScript tests for the history chart data helpers.
 - Per-column catalogue filters, including categorical selectors for area,
   finding kind, target, status, and reproducer availability.
 - Multi-column sorting with independent directions, visible priorities, and

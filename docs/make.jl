@@ -118,10 +118,89 @@ function prepare_sources(findings)
     return finding_pages
 end
 
+const HISTORY_AREAS = ["LinearAlgebra", "SparseArrays", "Base", "Statistics", "Dates", "Compiler"]
+
+# First-commit date (YYYY-MM-DD) of a finding's directory, i.e. when it entered the catalogue.
+# Requires full git history (the docs workflow checks out with fetch-depth: 0).
+function finding_date(slug)
+    path = "findings/$slug/README.md"
+    out = try
+        read(Cmd(`git log --diff-filter=A --format=%aI --follow -- $path`; dir = ROOT), String)
+    catch
+        ""
+    end
+    lines = filter(!isempty, split(strip(out), '\n'))
+    isempty(lines) && error("no git add-date for $slug (shallow checkout? use fetch-depth: 0)")
+    return String(first(last(lines), 10))
+end
+
+json_str(s) = '"' * replace(string(s), '\\' => "\\\\", '"' => "\\\"") * '"'
+
+function build_history(findings)
+    dates = sort(unique(finding_date(f.slug) for f in findings))
+    dindex = Dict(d => i for (i, d) in enumerate(dates))
+    present = [a for a in HISTORY_AREAS if any(f -> f.area == a, findings)]
+    added = Dict(a => zeros(Int, length(dates)) for a in present)
+    for f in findings
+        added[f.area][dindex[finding_date(f.slug)]] += 1
+    end
+    total = length(findings)
+    reported = count(f -> startswith(strip(f.status), "posted"), findings)
+    span = length(dates) == 1 ? dates[1] : "$(first(dates)) → $(last(dates))"
+
+    # cumulative-by-area table (accessible fallback) and the embedded JSON for the charts
+    cum = Dict(a => cumsum(added[a]) for a in present)
+    header = "| Date | " * join(present, " | ") * " | Total |"
+    sep = "|---|" * repeat("---:|", length(present) + 1)
+    rows = String[]
+    for (i, d) in enumerate(dates)
+        tot = sum(cum[a][i] for a in present)
+        push!(rows, "| $d | " * join((string(cum[a][i]) for a in present), " | ") * " | $tot |")
+    end
+
+    added_json = "{" * join(
+        ("$(json_str(a)):[" * join(added[a], ",") * "]" for a in present), ",") * "}"
+    data_json = "{" *
+        "\"dates\":[" * join((json_str(d) for d in dates), ",") * "]," *
+        "\"areas\":[" * join((json_str(a) for a in present), ",") * "]," *
+        "\"addedByArea\":$added_json," *
+        "\"total\":$total,\"reported\":$reported}"
+
+    page = """
+    # History
+
+    How the catalogue has grown over time. Each entry is dated by the first commit that added it to
+    [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings); the chart stacks the
+    cumulative count by Julia component. See the full list on the [Findings](findings.md) page.
+
+    ```@raw html
+    <div class="jf-stat-row">
+      <div class="jf-stat"><span class="jf-stat-value">$total</span><span class="jf-stat-label">findings</span></div>
+      <div class="jf-stat"><span class="jf-stat-value">$(length(present))</span><span class="jf-stat-label">components</span></div>
+      <div class="jf-stat"><span class="jf-stat-value">$reported</span><span class="jf-stat-label">reported upstream</span></div>
+      <div class="jf-stat"><span class="jf-stat-value jf-stat-span">$span</span><span class="jf-stat-label">catalogue span</span></div>
+    </div>
+    <div id="jf-history-charts" class="jf-history-charts"></div>
+    <script type="application/json" id="jf-history-data">$data_json</script>
+    ```
+
+    ## Cumulative findings by component
+
+    The chart above is generated from this table; the figures are cumulative totals at each date.
+
+    $header
+    $sep
+    $(join(rows, "\n"))
+    """
+    write(joinpath(@__DIR__, "src", "history.md"), page)
+    return nothing
+end
+
 finding_dirs = sort(filter(path -> isdir(path) && isfile(joinpath(path, "README.md")),
     readdir(FINDINGS_ROOT; join = true)))
 findings = sort(read_finding.(finding_dirs); by = finding -> finding.number)
 finding_pages = prepare_sources(findings)
+build_history(findings)
 
 makedocs(
     sitename = "Julia findings",
@@ -134,7 +213,7 @@ makedocs(
         edit_link = nothing,
         inventory_version = "dev",
         prettyurls = get(ENV, "CI", "false") == "true",
-        assets = ["assets/custom.css", "assets/interactive-tables.js"],
+        assets = ["assets/custom.css", "assets/interactive-tables.js", "assets/history-charts.js"],
         repolink = "https://github.com/s-celles/julia-findings",
         size_threshold = 2_000_000,
     ),
@@ -145,6 +224,7 @@ makedocs(
     pages = [
         "Home" => "index.md",
         "Findings" => "findings.md",
+        "History" => "history.md",
         "How we test" => "methodology.md",
         "Contributing" => "generated/contributing.md",
         "Agent policy" => "generated/AGENTS.md",

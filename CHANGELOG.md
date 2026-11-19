@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `llms.txt` and `llms-full.txt` at the site root, and a `CITATION.cff` with a
+  citation on the home page, for machine-readable and citable use (site-kit
+  SK-LLMS, SK-HOME-CITE).
+- A non-commercial disclaimer, an AI-provenance note, and a build-commit data
+  stamp on the home page and the generated data pages (site-kit SK-HOME-STAMP,
+  SK-HOME-DISCLAIMER, SK-HOME-PROVENANCE).
 - History page with an interactive time-series chart of the catalogue's growth,
   stacking cumulative findings by Julia component, with a stat summary and an
   accessible cumulative table. Entry dates come from each finding's first commit.

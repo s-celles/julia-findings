@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this catalogue, please cite it as below."
+title: "Julia findings: a catalogue of differential, concolic and fuzz testing findings"
+abstract: >-
+  Minimized, reproducible findings from differential, concolic and fuzz testing
+  of the Julia language and its standard libraries, kept in one searchable
+  catalogue with standalone reproducers.
+type: dataset
+authors:
+  - family-names: Celles
+    given-names: Sébastien
+    alias: s-celles
+repository-code: "https://github.com/s-celles/julia-findings"
+url: "https://s-celles.github.io/julia-findings/"
+license: MIT
+keywords:
+  - Julia
+  - differential testing
+  - fuzzing
+  - concolic testing
+  - software correctness

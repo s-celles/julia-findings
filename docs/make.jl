@@ -101,6 +101,7 @@ function prepare_sources(findings)
     catalogue = """
     # Findings
 
+    $(data_stamp())
     This catalogue is generated from the entry directories in [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings). Search all columns at once, or use the controls below each heading to combine column filters. Select a heading for a single-column sort; hold `Shift` while selecting additional headings to build a multi-column sort with an independent direction for each key. The numbered arrows show sort priority, and the controls above the table can reverse or remove any key. Every linked Julia script is standalone and asserts the observed behavior.
 
     | # | Finding | Area | Kind | Target | Status | Reproducer | GitHub issue |
@@ -136,6 +137,15 @@ end
 
 json_str(s) = '"' * replace(string(s), '\\' => "\\\\", '"' => "\\\"") * '"'
 
+# Build-time commit stamp (SK-HOME-STAMP): full git history is available on CI (fetch-depth: 0).
+const DATA_COMMIT = try strip(read(Cmd(`git rev-parse --short HEAD`; dir = ROOT), String)) catch; "" end
+const DATA_DATE = try strip(read(Cmd(`git log -1 --format=%cs`; dir = ROOT), String)) catch; "" end
+function data_stamp()
+    isempty(DATA_COMMIT) && return ""
+    suffix = isempty(DATA_DATE) ? "" : " ($(DATA_DATE))"
+    return "```@raw html\n<p class=\"data-stamp\">Data at commit <code>$(DATA_COMMIT)</code>$(suffix).</p>\n```\n\n"
+end
+
 function build_history(findings)
     dates = sort(unique(finding_date(f.slug) for f in findings))
     dindex = Dict(d => i for (i, d) in enumerate(dates))
@@ -169,6 +179,7 @@ function build_history(findings)
     page = """
     # History
 
+    $(data_stamp())
     How the catalogue has grown over time. Each entry is dated by the first commit that added it to
     [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings); the chart stacks the
     cumulative count by Julia component. See the full list on the [Findings](findings.md) page.
@@ -193,6 +204,50 @@ function build_history(findings)
     $(join(rows, "\n"))
     """
     write(joinpath(@__DIR__, "src", "history.md"), page)
+    return nothing
+end
+
+const SITE_URL = "https://s-celles.github.io/julia-findings"
+
+# llms.txt / llms-full.txt at the site root (SK-LLMS): pitch, disclaimer, provenance, pages, registry.
+function build_llms(findings)
+    stamp = isempty(DATA_COMMIT) ? "" : "Data at commit $(DATA_COMMIT)" *
+        (isempty(DATA_DATE) ? "" : " ($(DATA_DATE))") * ".\n"
+    header = """
+    # Julia findings
+
+    > Minimized, reproducible findings from differential, concolic and fuzz testing of the Julia
+    > language and its standard libraries, kept in one searchable catalogue with standalone reproducers.
+
+    Disclaimer: an individual, non-commercial testing project. Not produced, endorsed or certified by
+    JuliaLang, JuliaHub, or the maintainers of any package it examines.
+    Provenance: findings and reproducers are produced with AI assistance and gated by a person before
+    anything is taken to Julia's upstream trackers.
+    $(stamp)
+    ## Pages
+
+    - Findings: $(SITE_URL)/findings/
+    - History: $(SITE_URL)/history/
+    - How we test: $(SITE_URL)/methodology/
+    - Repository: https://github.com/s-celles/julia-findings
+    - Citation: https://github.com/s-celles/julia-findings/blob/main/CITATION.cff
+    """
+
+    short = IOBuffer()
+    print(short, header, "\n## Findings ($(length(findings)))\n\n")
+    for f in findings
+        println(short, "- $(lpad(f.number, 2, '0')): $(f.title) — $(f.area); $(f.status)")
+    end
+    write(joinpath(@__DIR__, "build", "llms.txt"), String(take!(short)))
+
+    full = IOBuffer()
+    print(full, header, "\n## Findings ($(length(findings))) — full text\n\n")
+    for f in findings
+        body = read(joinpath(FINDINGS_ROOT, f.slug, "README.md"), String)
+        println(full, "----------------------------------------------------------------------\n")
+        println(full, body, "\n")
+    end
+    write(joinpath(@__DIR__, "build", "llms-full.txt"), String(take!(full)))
     return nothing
 end
 
@@ -231,3 +286,5 @@ makedocs(
         (hide(page) for page in finding_pages)...,
     ],
 )
+
+build_llms(findings)

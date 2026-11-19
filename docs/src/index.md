@@ -36,3 +36,24 @@ features:
     link: /findings/
 ---
 ```
+
+```@eval
+import Markdown
+root = normpath(joinpath(@__DIR__, "..", ".."))
+hash = try strip(read(Cmd(`git rev-parse --short HEAD`; dir = root), String)) catch; "" end
+date = try strip(read(Cmd(`git log -1 --format=%cs`; dir = root), String)) catch; "" end
+Markdown.parse("Data at commit `" * hash * "`" * (isempty(date) ? "" : " ($(date))") * ".")
+```
+
+```@raw html
+<div class="disclaimer">
+<p><strong>Disclaimer.</strong> An individual, non-commercial testing project. It is not produced, endorsed or certified by JuliaLang, JuliaHub, or the maintainers of any package it examines. Its aim is to minimize and document edge cases, not to rank or disparage software.</p>
+<p><strong>Provenance.</strong> Findings and reproducers are produced with AI assistance and gated by a person: a human decides what, if anything, is taken to Julia's upstream trackers.</p>
+</div>
+```
+
+## Cite
+
+> Sébastien Celles. *Julia findings: a catalogue of differential, concolic and fuzz testing findings*. 2026. <https://github.com/s-celles/julia-findings>
+
+Machine-readable metadata is in [`CITATION.cff`](https://github.com/s-celles/julia-findings/blob/main/CITATION.cff).

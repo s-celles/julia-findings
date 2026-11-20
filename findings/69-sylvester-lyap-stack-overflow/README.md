@@ -1,7 +1,7 @@
 # 69: `sylvester` and `lyap` overflow the stack for `Float16`, `ComplexF16`, `BigFloat` and `Rational{BigInt}` matrices
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not posted
+- Status: fixed on nightly — reported independently by a maintainer as [JuliaLang/LinearAlgebra.jl#1884](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1884) and fixed by [JuliaLang/LinearAlgebra.jl#1887](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1887) (merged 2026-11-16); `sylvester`/`lyap` now throw `ArgumentError` instead of overflowing the stack
 
 # Body
 

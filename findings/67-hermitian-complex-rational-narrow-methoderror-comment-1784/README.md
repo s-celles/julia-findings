@@ -1,7 +1,7 @@
 # 67: Comment on JuliaLang/LinearAlgebra.jl#1784: on LinearAlgebra 1.13.0 `det`, `\` and `bunchkaufman` of a `Hermitian{Complex{Rational{Int16}}}` throw `MethodError` in `generic_adr1!` (backport candidate)
 
 - Kind: comment for `JuliaLang/LinearAlgebra.jl#1784`
-- Status: not posted
+- Status: posted ([comment on JuliaLang/LinearAlgebra.jl#1784](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1784#issuecomment-7032050223), backport request for 1.13, 2026-11-20)
 
 # Body
 

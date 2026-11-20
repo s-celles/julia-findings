@@ -19,6 +19,15 @@ behaviour, and nothing here is a security advisory or an official bug report.
 Use the reproducers at your own risk and verify them on your own Julia before
 relying on them.
 
+## Disclosure
+
+Disclosure: julia (JuliaLang/julia), contributor; LinearAlgebra.jl, reporter
+and contributor; SparseArrays.jl, reporter; Statistics.jl, reporter;
+Concolic.jl, author; no funding, employment or other interest in a system
+examined; works with an AI assistant.
+The declarations are in [docs/disclosures.tsv](docs/disclosures.tsv) and on the
+[Disclosure page](https://s-celles.github.io/julia-findings/generated/conflict-of-interest/).
+
 ## Why this repository exists
 
 The goal is to make Julia better while respecting the maintainers' time.

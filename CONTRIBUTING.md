@@ -21,7 +21,18 @@ to open something upstream.
 
 **For agents:** read [AGENTS.md](https://github.com/s-celles/julia-findings/blob/main/AGENTS.md); the rules there are binding.
 
-**Disclosure:** this repository is public. Findings that touch memory safety
+**Declarations:** every contributor declares their relation to the systems
+examined (issues, pull requests, maintainer roles), any funding, employment or
+other interest, and their use of AI assistants, in their own rows of
+[docs/disclosures.tsv](https://github.com/s-celles/julia-findings/blob/main/docs/disclosures.tsv);
+the [Disclosure page](https://s-celles.github.io/julia-findings/generated/conflict-of-interest/)
+is generated from it. A change that adds or updates an entry is not complete
+without the rows of the person it is made for: an agent that makes the change
+adds or updates those rows, and the person confirms them. When a row changes,
+the one-line summary in `README.md` and `CITATION.cff` changes with it (the
+build fails otherwise).
+
+**Security-sensitive findings:** this repository is public. Findings that touch memory safety
 (out-of-bounds reads or writes, uninitialized memory, type confusion,
 crashes) are not published here until they have been triaged by a person
 and reported privately to security@julialang.org, as JuliaLang's

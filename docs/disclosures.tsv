@@ -1,0 +1,10 @@
+# Declarations of the julia-findings contributors (site-kit SPEC 0.3, section 15).
+# GitHub counts as of 2026-11-20; s-celles-bot is the contributor's bot account.
+contributor	orcid	project	kind	role	note
+Sébastien Celles	0000-0001-9987-4338	julia (JuliaLang/julia)	examined system	contributor	18 issues (2017 to 2021, mostly Dates and Enums) and 9 pull requests (7 merged, documentation and contrib cleanups from 2017 to 2021; 1 open); 2 issues from the bot account
+Sébastien Celles	0000-0001-9987-4338	LinearAlgebra.jl	examined system	reporter and contributor	40 issues and 11 pull requests (5 merged, 4 open) from the bot account, all from findings of this catalogue; 4 comments from the personal account
+Sébastien Celles	0000-0001-9987-4338	SparseArrays.jl	examined system	reporter	8 issues from the bot account, all from findings of this catalogue; no pull request
+Sébastien Celles	0000-0001-9987-4338	Statistics.jl	examined system	reporter	3 issues from the personal account and 3 from the bot account; no pull request
+Sébastien Celles	0000-0001-9987-4338	Concolic.jl	tool	author	the exploration tool that produced the findings; not published
+Sébastien Celles	0000-0001-9987-4338	funding, employment or other interest in a system examined	other	none	individual, non-commercial project; not a member of the JuliaLang, JuliaSparse or JuliaStats organizations
+Sébastien Celles	0000-0001-9987-4338	an AI assistant	AI assistance	used to write the probes, drivers and reproducers, the catalogue entries, the site generator, and drafts of upstream issues and pull requests	every finding was reproduced before publication; every change and every upstream post was reviewed and decided by the contributor

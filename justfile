@@ -2,11 +2,12 @@ default: check
 
 julia := env_var_or_default("JULIA", "julia")
 
-site_kit_tag := "v0.2.0"
+site_kit_tag := "v0.3.1"
 
 test:
     node --test test/interactive-tables.test.js
     python3 -I -B -m unittest discover -s test -p 'test_*.py'
+    {{julia}} test/test_disclosures.jl
 
 docs:
     {{julia}} --project=docs docs/make.jl

@@ -24,7 +24,7 @@ Concolic testing combines concrete execution with symbolic constraints, while st
 3. save mismatches as standalone candidates;
 4. minimize each candidate and inspect the dispatch path or closed form responsible;
 5. search this catalogue and upstream trackers for duplicates;
-6. publish the result here with its status and searches—not to an upstream tracker.
+6. publish the result here with its status and searches, not to an upstream tracker.
 
 ## Reading an entry
 
@@ -69,4 +69,4 @@ prepared reproducer from the cross-reference.
 
 ## Site structure
 
-This site follows the shared [site-kit](https://github.com/s-celles/site-kit) specification, version 0.2 (tag `v0.2.0`): a common structure, statuses, upstream and history pages across related projects.
+This site follows the shared [site-kit](https://github.com/s-celles/site-kit) specification, version 0.3 (tag `v0.3.1`): a common structure, statuses, upstream, history and disclosure pages across related projects.

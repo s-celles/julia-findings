@@ -49,6 +49,7 @@ test("status and reproducer filters use stable categories", () => {
   );
   assert.equal(filterValueForColumn("Status", "not posted"), "not posted");
   assert.equal(filterValueForColumn("Reproducer", "—"), "none");
+  assert.equal(filterValueForColumn("Reproducer", "none"), "none");
   assert.equal(filterValueForColumn("Reproducer", "example.jl"), "available");
 });
 

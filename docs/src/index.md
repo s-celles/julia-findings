@@ -5,7 +5,7 @@ layout: home
 hero:
   name: Julia findings
   text: Edge cases, brought into focus
-  tagline: Minimized and reproducible findings from differential, concolic, and fuzz testing—kept in one searchable catalogue.
+  tagline: Minimized and reproducible findings from differential, concolic, and fuzz testing, kept in one searchable catalogue.
   actions:
     - theme: brand
       text: Browse findings
@@ -24,7 +24,7 @@ features:
     link: /findings/
   - icon: 🔀
     title: Differential
-    details: Equivalent representations are compared—ranges and vectors, structured and dense matrices, narrow and wide arithmetic.
+    details: Equivalent representations are compared, such as ranges and vectors, structured and dense matrices, narrow and wide arithmetic.
     link: /methodology/
   - icon: 🧭
     title: Human-gated
@@ -52,8 +52,16 @@ Markdown.parse("Data at commit `" * hash * "`" * (isempty(date) ? "" : " ($(date
 </div>
 ```
 
+```@eval
+import Markdown
+Markdown.parse(Main.home_disclosure())
+```
+
 ## Cite
 
-> Sébastien Celles. *Julia findings: a catalogue of differential, concolic and fuzz testing findings*. 2026. <https://github.com/s-celles/julia-findings>
+```@eval
+import Markdown
+Markdown.parse(Main.home_cite())
+```
 
 Machine-readable metadata is in [`CITATION.cff`](https://github.com/s-celles/julia-findings/blob/main/CITATION.cff).

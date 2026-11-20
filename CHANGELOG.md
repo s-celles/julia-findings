@@ -7,7 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- site-kit SPEC 0.3 (tag `v0.3.1`) for the CI check and `just upstream`; the
+  menu gains Disclosure after Methodology. In CONTRIBUTING, the memory-safety
+  paragraph is now titled "Security-sensitive findings", and a new
+  "Declarations" paragraph asks every change to come with its contributor's rows.
+
 ### Added
+
+- A Disclosure page (site-kit SPEC 0.3, §15), generated from the committed
+  declarations in `docs/disclosures.tsv`: the contributor's relation to every
+  system examined (issues and pull requests per package), to the tool that
+  produced the findings, any funding or other interest, and the use of an AI
+  assistant, with a matrix of systems by contributors, what limits the bias and
+  how to report a wrong declaration. Its one-line summary is on the home page,
+  in every page footer, the README, `CITATION.cff` and `llms.txt`; the build
+  fails if the README or `CITATION.cff` carry a stale summary.
+- The home page citation and a BibTeX entry (`celles2026juliafindings`) are
+  generated from `CITATION.cff`, which gains `date-released`.
+- Julia tests for the declarations and citation helpers (`test/test_disclosures.jl`).
 
 - Upstream states on the Upstream page: each cited issue and pull request
   shows its state (open, merged, closed, not planned), dates and the entries
@@ -18,6 +37,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   each entry's Status line for the snapshot.
 
 ### Fixed
+
+- No em dash in the text the site generates (SPEC §15): the hero,
+  Methodology, the sidebar titles of entries, `llms.txt`, and the empty
+  Reproducer cell, which now reads "none". The Status lines of some entries
+  still contain one.
 
 - Status badges inside tables rendered as literal HTML text; the Upstream table
   is now raw HTML. The History stat tiles linked to `/history/...` paths under

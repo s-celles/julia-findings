@@ -40,7 +40,7 @@
       if (value.startsWith("posted")) return "posted";
     }
     if (header === "reproducer") {
-      return value === "" || value === "—" ? "none" : "available";
+      return value === "" || value === "—" || value === "none" ? "none" : "available";
     }
     return value;
   }

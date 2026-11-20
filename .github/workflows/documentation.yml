@@ -29,13 +29,15 @@ jobs:
         with:
           version: '1.13'
       - uses: julia-actions/cache@v2
+      - name: Test the disclosure and citation helpers
+        run: julia test/test_disclosures.jl
       - name: Instantiate documentation environment
         run: julia --project=docs -e 'using Pkg; Pkg.instantiate()'
       - name: Build documentation
         run: julia --project=docs docs/make.jl
       - name: Check the site against the site-kit SPEC
         run: |
-          git clone --depth 1 --branch v0.2.0 https://github.com/s-celles/site-kit.git /tmp/site-kit
+          git clone --depth 1 --branch v0.3.1 https://github.com/s-celles/site-kit.git /tmp/site-kit
           python3 -I /tmp/site-kit/tools/check_site.py --site docs/build --config site-kit.json --repo .
       - name: Check the build is deterministic
         run: |

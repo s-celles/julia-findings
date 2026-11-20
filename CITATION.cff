@@ -5,11 +5,16 @@ abstract: >-
   Minimized, reproducible findings from differential, concolic and fuzz testing
   of the Julia language and its standard libraries, kept in one searchable
   catalogue with standalone reproducers.
+  Disclosure: julia (JuliaLang/julia), contributor; LinearAlgebra.jl, reporter
+  and contributor; SparseArrays.jl, reporter; Statistics.jl, reporter;
+  Concolic.jl, author; no funding, employment or other interest in a system
+  examined; works with an AI assistant.
 type: dataset
 authors:
   - family-names: Celles
     given-names: Sébastien
     alias: s-celles
+date-released: 2026-11-13
 repository-code: "https://github.com/s-celles/julia-findings"
 url: "https://s-celles.github.io/julia-findings/"
 license: MIT

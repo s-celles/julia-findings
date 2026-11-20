@@ -2,6 +2,8 @@ using Documenter
 using DocumenterCodeBlocks
 using DocumenterLandingPage
 
+include(joinpath(@__DIR__, "disclosures.jl"))
+
 const ROOT = normpath(joinpath(@__DIR__, ".."))
 const FINDINGS_ROOT = joinpath(ROOT, "findings")
 const GENERATED_ROOT = joinpath(@__DIR__, "src", "generated")
@@ -81,7 +83,7 @@ function prepare_sources(findings)
         end
 
         entry = "generated/findings/$(finding.slug)/index.md"
-        scripts = isempty(finding.scripts) ? "—" : join(
+        scripts = isempty(finding.scripts) ? "none" : join(
             ["[$script](generated/findings/$(finding.slug)/$script)" for script in finding.scripts],
             ", ",
         )
@@ -95,7 +97,7 @@ function prepare_sources(findings)
             scripts,
             "[#$issue]($issue_url)",
         ), " | ") * " |")
-        push!(finding_pages, "$(lpad(string(finding.number), 2, '0')) — $(finding.title)" => entry)
+        push!(finding_pages, "$(lpad(string(finding.number), 2, '0')): $(finding.title)" => entry)
     end
 
     catalogue = """
@@ -219,6 +221,34 @@ end
 
 const SITE_URL = "https://s-celles.github.io/julia-findings"
 
+# Declarations (SPEC §15) and citation (SPEC §3), read once for the pages, the footer and llms.txt.
+const DISCLOSURES = read_disclosures(read(joinpath(@__DIR__, "disclosures.tsv"), String))
+const DISCLOSURE_SUMMARY = disclosure_summary(DISCLOSURES)
+const DISCLOSURE_URL = "$(SITE_URL)/generated/$(DISCLOSURE_PAGE)/"
+const CITATION = read_cff(read(joinpath(ROOT, "CITATION.cff"), String))
+
+# The system a finding examines, as named in docs/disclosures.tsv.
+system_of(area) = get(Dict("LinearAlgebra" => "LinearAlgebra.jl", "SparseArrays" => "SparseArrays.jl",
+    "Statistics" => "Statistics.jl"), area, "julia (JuliaLang/julia)")
+
+# The disclosure page; the README and CITATION.cff carry the same one-line summary (SPEC §15).
+function build_disclosure(findings)
+    others = sort(filter(!=("julia (JuliaLang/julia)"), unique(system_of(f.area) for f in findings)))
+    systems = ["julia (JuliaLang/julia)"; others]
+    mkpath(GENERATED_ROOT)
+    write(joinpath(GENERATED_ROOT, "$(DISCLOSURE_PAGE).md"), disclosure_page(DISCLOSURES, systems))
+    for file in ("README.md", "CITATION.cff")
+        text = replace(read(joinpath(ROOT, file), String), r"\s+" => " ")
+        occursin(DISCLOSURE_SUMMARY, text) ||
+            error("$(file) does not carry the disclosure summary of docs/disclosures.tsv:\n$(DISCLOSURE_SUMMARY)")
+    end
+    return nothing
+end
+
+# Home page blocks, called from the @eval blocks of index.md.
+home_disclosure() = DISCLOSURE_SUMMARY * " [Details]($(DISCLOSURE_URL))."
+home_cite() = "> " * citation_text(CITATION) * "\n\n```bibtex\n" * citation_bibtex(CITATION) * "\n```\n"
+
 # llms.txt / llms-full.txt at the site root (SK-LLMS): pitch, disclaimer, provenance, pages, registry.
 function build_llms(findings)
     stamp = isempty(DATA_COMMIT) ? "" : "Data at commit $(DATA_COMMIT)" *
@@ -233,12 +263,14 @@ function build_llms(findings)
     JuliaLang, JuliaHub, or the maintainers of any package it examines.
     Provenance: findings and reproducers are produced with AI assistance and gated by a person before
     anything is taken to Julia's upstream trackers.
+    $(DISCLOSURE_SUMMARY) Details: $(DISCLOSURE_URL)
     $(stamp)
     ## Pages
 
     - Findings: $(SITE_URL)/findings/
     - History: $(SITE_URL)/history/
     - How we test: $(SITE_URL)/methodology/
+    - Disclosure: $(DISCLOSURE_URL)
     - Repository: https://github.com/s-celles/julia-findings
     - Citation: https://github.com/s-celles/julia-findings/blob/main/CITATION.cff
     """
@@ -246,12 +278,12 @@ function build_llms(findings)
     short = IOBuffer()
     print(short, header, "\n## Findings ($(length(findings)))\n\n")
     for f in findings
-        println(short, "- $(lpad(f.number, 2, '0')): $(f.title) — $(f.area); $(f.status)")
+        println(short, "- $(lpad(f.number, 2, '0')): $(f.title) ($(f.area)); $(f.status)")
     end
     write(joinpath(@__DIR__, "build", "llms.txt"), String(take!(short)))
 
     full = IOBuffer()
-    print(full, header, "\n## Findings ($(length(findings))) — full text\n\n")
+    print(full, header, "\n## Findings ($(length(findings))), full text\n\n")
     for f in findings
         body = read(joinpath(FINDINGS_ROOT, f.slug, "README.md"), String)
         println(full, "----------------------------------------------------------------------\n")
@@ -378,6 +410,7 @@ finding_pages = prepare_sources(findings)
 build_history(findings)
 build_statuses()
 build_upstream(findings)
+build_disclosure(findings)
 
 makedocs(
     sitename = "Julia findings",
@@ -393,6 +426,9 @@ makedocs(
         assets = ["assets/site-kit.css", "assets/custom.css", "assets/interactive-tables.js", "assets/viz.js"],
         repolink = "https://github.com/s-celles/julia-findings",
         size_threshold = 2_000_000,
+        footer = "An individual, non-commercial project, not endorsed by JuliaLang, JuliaHub or the maintainers " *
+            "of the packages it examines. Code and data MIT. Written with AI assistance. " *
+            DISCLOSURE_SUMMARY * " [Details]($(DISCLOSURE_URL)).",
     ),
     plugins = [
         LandingPage(),
@@ -404,6 +440,7 @@ makedocs(
         "Upstream" => "upstream.md",
         "History" => "history.md",
         "Methodology" => "methodology.md",
+        "Disclosure" => "generated/$(DISCLOSURE_PAGE).md",
         "Statuses" => "statuses.md",
         "Contributing" => "generated/contributing.md",
         "Agent policy" => "generated/AGENTS.md",

@@ -52,6 +52,24 @@ test("status and reproducer filters use stable categories", () => {
   assert.equal(filterValueForColumn("Reproducer", "example.jl"), "available");
 });
 
+test("a fix merged upstream is its own status category", () => {
+  assert.equal(
+    filterValueForColumn(
+      "Status",
+      "fixed upstream — JuliaSparse/SparseArrays.jl#1175 closed by PR #1183 (2026-11-18)",
+    ),
+    "fixed upstream",
+  );
+  assert.equal(
+    filterValueForColumn(
+      "Status",
+      "posted (JuliaLang/LinearAlgebra.jl#1898); fixed upstream by JuliaLang/LinearAlgebra.jl#1903",
+    ),
+    "fixed upstream",
+  );
+  assert.equal(filterValueForColumn("Status", "fixed on nightly"), "fixed on nightly");
+});
+
 test("Documenter tables without thead are normalized before enhancement", () => {
   const headerRow = { id: "header" };
   const body = { rows: [{ id: "data" }] };

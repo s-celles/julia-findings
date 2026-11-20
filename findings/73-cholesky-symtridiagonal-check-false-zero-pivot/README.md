@@ -1,7 +1,7 @@
 # 73: `cholesky(::SymTridiagonal; check=false)` throws `ZeroPivotException` on a zero diagonal pivot, so `isposdef(::SymTridiagonal)` throws instead of returning `false` — regression in LinearAlgebra 1.13
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1899](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1899)); fix proposed in [JuliaLang/LinearAlgebra.jl#1915](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1915) (open, 2026-11-18)
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1899](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1899)); fixed upstream by [JuliaLang/LinearAlgebra.jl#1915](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1915) (merged 2026-11-19)
 
 # Body
 

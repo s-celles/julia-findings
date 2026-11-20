@@ -1,7 +1,7 @@
 # 96: `cond` of an all-zero integer `Diagonal` throws `InexactError: Int64(Inf)` (`cond(Diagonal([0, 0]))`), while the dense matrix, a `Float64` `Diagonal` and a `Diagonal` with one non-zero entry return `Inf`
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: not filed as an issue (trivial one-line fix, per the LinearAlgebra.jl#1912 guidance); fix proposed in [JuliaLang/LinearAlgebra.jl#1929](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1929) (open, 2026-11-19)
+- Status: not filed as an issue (trivial one-line fix, per the LinearAlgebra.jl#1912 guidance); fixed upstream by [JuliaLang/LinearAlgebra.jl#1929](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1929) (merged 2026-11-19)
 
 # Body
 

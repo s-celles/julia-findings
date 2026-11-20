@@ -154,7 +154,7 @@ function build_history(findings)
     for f in findings
         i = dindex[finding_date(f.slug)]
         addTot[i] += 1
-        status_word(f.status) == "posted" && (addRep[i] += 1)
+        status_word(f.status) in ("posted", "fixed upstream") && (addRep[i] += 1)
     end
     cumTot = cumsum(addTot); cumRep = cumsum(addRep)
     total = cumTot[end]; reported = cumRep[end]
@@ -264,12 +264,14 @@ end
 const STATUS_TONES = Dict(
     "not posted" => "neutral",
     "posted" => "info",
+    "fixed upstream" => "good",
     "fixed on nightly" => "good",
     "by design" => "warn",
     "duplicate" => "alt",
 )
 const STATUS_MEANINGS = [
     "posted" => "An upstream report (issue or pull request) exists for this finding.",
+    "fixed upstream" => "A fix has been merged upstream: the report was closed by a merged pull request.",
     "fixed on nightly" => "The behavior is already fixed on an official Julia nightly.",
     "by design" => "The behavior is intended; the entry documents the sharp edge.",
     "duplicate" => "The same behavior is recorded by an existing upstream report.",
@@ -277,6 +279,7 @@ const STATUS_MEANINGS = [
 ]
 function status_word(status)
     s = lowercase(strip(status))
+    occursin("fixed upstream", s) && return "fixed upstream"
     startswith(s, "not posted") && return "not posted"
     startswith(s, "fixed on nightly") && return "fixed on nightly"
     startswith(s, "by design") && return "by design"

@@ -1,7 +1,7 @@
 # 80: `rmul!(C, A)` with two triangular matrices returns silently wrong values for unit-triangular and mixed combinations (the destination is used as the left factor while being overwritten)
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1907](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1907))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1907](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1907)); fixed upstream by [JuliaLang/LinearAlgebra.jl#1936](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1936) (merged 2026-11-19)
 
 # Body
 

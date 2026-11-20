@@ -1,7 +1,7 @@
 # 68: `imag` of a `UnitLowerTriangular`/`UnitUpperTriangular` matrix with complex elements keeps a complex element type
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1897](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1897))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1897](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1897)); fixed upstream by [JuliaLang/LinearAlgebra.jl#1913](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1913) (merged 2026-11-19)
 
 # Body
 

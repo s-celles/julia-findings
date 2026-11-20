@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- A `fixed upstream` status, with its own badge and table filter, for findings
+  whose upstream report was closed by a merged pull request; such findings
+  count as reported upstream on the History page.
+
 - Alignment with the shared [site-kit](https://github.com/s-celles/site-kit)
   specification v0.2: a Statuses page with status badges and a consistent tone
   per word, an Upstream page listing the cited issues and pull requests by

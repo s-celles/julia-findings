@@ -14,6 +14,7 @@
     "by design": "By design",
     duplicate: "Duplicate",
     "fixed on nightly": "Fixed on nightly",
+    "fixed upstream": "Fixed upstream",
     none: "None",
     "not posted": "Not posted",
     posted: "Posted",
@@ -31,6 +32,7 @@
     const value = normalizeText(cellText);
 
     if (header === "status") {
+      if (value.includes("fixed upstream")) return "fixed upstream";
       if (value.startsWith("not posted")) return "not posted";
       if (value.startsWith("fixed on nightly")) return "fixed on nightly";
       if (value.startsWith("by design")) return "by design";

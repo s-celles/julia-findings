@@ -6,7 +6,7 @@ site_kit_tag := "v0.2.0"
 
 test:
     node --test test/interactive-tables.test.js
-    python3 -I -m unittest discover -s test -p 'test_*.py'
+    python3 -I -B -m unittest discover -s test -p 'test_*.py'
 
 docs:
     {{julia}} --project=docs docs/make.jl

@@ -1,7 +1,7 @@
 # 83: a broadcast over three or more structured matrices silently drops entries (`B .+ U .+ B` returns a `Bidiagonal`): the two-argument `DefaultArrayStyle{2}` fallback is not sticky
 
 - Kind: issue for `JuliaLang/LinearAlgebra.jl`
-- Status: posted ([JuliaLang/LinearAlgebra.jl#1910](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1910))
+- Status: posted ([JuliaLang/LinearAlgebra.jl#1910](https://github.com/JuliaLang/LinearAlgebra.jl/issues/1910)); fix proposed in [JuliaLang/LinearAlgebra.jl#1940](https://github.com/JuliaLang/LinearAlgebra.jl/pull/1940) (open, 2026-11-20)
 
 # Body
 

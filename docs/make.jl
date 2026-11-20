@@ -136,6 +136,7 @@ function finding_date(slug)
 end
 
 json_str(s) = '"' * replace(string(s), '\\' => "\\\\", '"' => "\\\"") * '"'
+html_esc(s) = replace(string(s), '&' => "&amp;", '<' => "&lt;", '>' => "&gt;", '"' => "&quot;")
 
 # Build-time commit stamp (SK-HOME-STAMP): full git history is available on CI (fetch-depth: 0).
 const DATA_COMMIT = try strip(read(Cmd(`git rev-parse --short HEAD`; dir = ROOT), String)) catch; "" end
@@ -201,7 +202,7 @@ function build_history(findings)
     $(data_stamp())How the catalogue has grown over time. Each entry is dated by the first commit that added it to [`findings/`](https://github.com/s-celles/julia-findings/tree/main/findings). The chart tracks the cumulative number of findings and of findings reported upstream.
 
     ```@raw html
-    <div class="sk-stats"><a class="sk-stat" href="findings/"><strong>$(total)</strong><span>findings</span></a><a class="sk-stat" href="findings/"><strong>$(ncomp)</strong><span>components</span></a><a class="sk-stat" href="upstream/"><strong>$(reported)</strong><span>reported upstream</span></a><a class="sk-stat" href="history/"><strong>$(span)</strong><span>catalogue span</span></a></div>
+    <div class="sk-stats"><a class="sk-stat" href="$(SITE_URL)/findings/"><strong>$(total)</strong><span>findings</span></a><a class="sk-stat" href="$(SITE_URL)/findings/"><strong>$(ncomp)</strong><span>components</span></a><a class="sk-stat" href="$(SITE_URL)/upstream/"><strong>$(reported)</strong><span>reported upstream</span></a><a class="sk-stat" href="$(SITE_URL)/history/"><strong>$(span)</strong><span>catalogue span</span></a></div>
 
     $(svg)
     ```
@@ -268,7 +269,18 @@ const STATUS_TONES = Dict(
     "fixed on nightly" => "good",
     "by design" => "warn",
     "duplicate" => "alt",
+    # upstream states of the snapshot (site-kit SPEC §5, §6)
+    "open" => "info",
+    "merged" => "good",
+    "closed" => "neutral",
+    "not planned" => "neutral-dashed",
 )
+const UPSTREAM_STATE_MEANINGS = [
+    "open" => "The issue or pull request is still open upstream.",
+    "merged" => "The pull request was merged.",
+    "closed" => "Closed upstream. A closed issue does not prove that a fix reached a release.",
+    "not planned" => "Closed upstream as not planned: by design, a duplicate, or out of scope.",
+]
 const STATUS_MEANINGS = [
     "posted" => "An upstream report (issue or pull request) exists for this finding.",
     "fixed upstream" => "A fix has been merged upstream: the report was closed by a merged pull request.",
@@ -303,38 +315,55 @@ function build_statuses()
     </dl>
     ```
 
-    See the [Findings](findings.md) table to filter by status, and the [Upstream](upstream.md) page for the reports themselves.
+    ## Upstream states
+
+    The [Upstream](upstream.md) page shows the state of each upstream issue and pull request, from the committed snapshot.
+
+    ```@raw html
+    <dl class="sk-status-list">
+    $(join(("<dt>$(badge(w))</dt><dd>$(m)</dd>" for (w, m) in UPSTREAM_STATE_MEANINGS), "\n"))
+    </dl>
+    ```
+
+    See the [Findings](findings.md) table to filter by status.
     """
     write(joinpath(@__DIR__, "src", "statuses.md"), page)
     return nothing
 end
 
 function build_upstream(findings)
-    # collect (repo, kind, number) references from each finding's Status line
-    refs = Dict{String, Vector{Tuple{String, Int, Finding}}}()  # repo => [(kind, number, finding)]
-    rx = r"github\.com/([\w.\-]+/[\w.\-]+)/(issues|pull)/(\d+)"
-    for f in findings
-        for m in eachmatch(rx, f.status)
-            repo, kindw, num = m.captures[1], m.captures[2], parse(Int, m.captures[3])
-            kind = kindw == "pull" ? "pull request" : "issue"
-            push!(get!(refs, repo, Tuple{String, Int, Finding}[]), (kind, num, f))
+    # upstream states come from the committed snapshot (site-kit SPEC §6), never from the network
+    tsv = joinpath(ROOT, "data", "upstream.tsv")
+    rows = Dict{String, String}[]
+    if isfile(tsv)
+        lines = split(chomp(read(tsv, String)), '\n')
+        head = split(lines[1], '\t')
+        for l in lines[2:end]
+            push!(rows, Dict(String(k) => String(v) for (k, v) in zip(head, split(l, '\t'; keepempty = true))))
         end
     end
+    bynum = Dict(lpad(f.number, 2, '0') => f for f in findings)
+    snapdate = try strip(read(Cmd(`git log -1 --format=%cs -- data/upstream.tsv`; dir = ROOT), String)) catch; "" end
     secs = String[]
-    for repo in sort(collect(keys(refs)))
-        rows = String[]
-        for (kind, num, f) in sort(refs[repo]; by = t -> t[2])
-            url = "https://github.com/$repo/$(kind == "pull request" ? "pull" : "issues")/$num"
-            entry = "generated/findings/$(f.slug)/index.md"
-            push!(rows, "| [#$num]($url) | $kind | [$(lpad(f.number, 2, '0')): $(escape_cell(first(f.title, 70)))]($entry) |")
+    for repo in sort(unique(r["repo"] for r in rows); by = lowercase)
+        rr = sort([r for r in rows if r["repo"] == repo]; by = r -> parse(Int, r["number"]))
+        lines = String[]
+        for r in rr
+            path = r["kind"] == "pr" ? "pull" : "issues"
+            ref = "<a href=\"https://github.com/$repo/$path/$(r["number"])\">#$(r["number"])</a>"
+            kind = r["kind"] == "pr" ? "pull request" : "issue"
+            closed = isempty(r["merged"]) ? r["closed"] : r["merged"]
+            entries = join(("<a href=\"$(SITE_URL)/generated/findings/$(bynum[e].slug)/\">$(e)</a>" for e in split(r["cited_by"]) if haskey(bynum, e)), ", ")
+            push!(lines, "<tr><td>$ref</td><td>$kind</td><td>$(badge(r["state"]))</td><td>$(r["created"])</td><td>$(closed)</td><td>$entries</td><td>$(html_esc(first(r["title"], 90)))</td></tr>")
         end
-        push!(secs, "## $repo\n\n| Reference | Kind | Finding |\n|---|---|---|\n$(join(rows, "\n"))\n")
+        push!(secs, "## $repo\n\n```@raw html\n<table><thead><tr><th>Reference</th><th>Kind</th><th>State</th><th>Opened</th><th>Closed or merged</th><th>Entries</th><th>Title</th></tr></thead><tbody>\n$(join(lines, "\n"))\n</tbody></table>\n```\n")
     end
-    total = sum(length(v) for v in values(refs); init = 0)
+    counts = join(("$(count(r -> r["state"] == s, rows)) $(s)" for s in ("open", "merged", "closed", "not planned")), ", ")
+    snap = isempty(snapdate) ? "" : " of $(snapdate)"
     page = """
     # Upstream
 
-    $(data_stamp())$(total) upstream references (issues and pull requests) cited by the catalogue, by repository. A closed issue does not prove that a fix reached a release.
+    $(data_stamp())$(length(rows)) upstream issues and pull requests reported by the catalogue ($(counts)), by repository. States come from the snapshot$(snap) in [`data/upstream.tsv`](https://github.com/s-celles/julia-findings/blob/main/data/upstream.tsv), refreshed with `just upstream`; the build never reads the network. A closed issue does not prove that a fix reached a release.
 
     $(join(secs, "\n"))
     """

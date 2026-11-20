@@ -1,0 +1,76 @@
+repo	number	kind	state	created	closed	merged	fixes	cited_by	title
+JuliaLang/julia	29576	issue	closed	2018-10-09	2022-01-06			31	reverse of an unsigned range does not work as expected
+JuliaLang/julia	58975	issue	open	2025-07-11				32	floating-point `range` may throw `InexactError` when it tries to convert NaN to an integer
+JuliaLang/julia	64133	issue	open	2026-10-24				05 34	ranges: broadcasted multiplication can produce a range that throws when indexed
+JuliaLang/julia	64138	issue	open	2026-10-24				33	ranges: allunique and allequal can disagree with floating range elements
+JuliaLang/LinearAlgebra.jl	508	issue	closed	2018-03-08	2019-09-16			18	Methods fail for 0x0 matrices
+JuliaLang/LinearAlgebra.jl	601	issue	open	2019-01-27				71	inv returns wrong result for this SymTridiagonal([1., 0., 0.], [0., 1.])
+JuliaLang/LinearAlgebra.jl	1453	issue	closed	2016-03-30	2026-04-22			24	`dot` overflows
+JuliaLang/LinearAlgebra.jl	1529	pr	merged	2025-12-19	2026-08-17	2026-08-17	JuliaLang/LinearAlgebra.jl#1405	75	Reland "Use `BLAS.trsm!` instead of `LAPACK.trtrs!` in left-triangular solves"
+JuliaLang/LinearAlgebra.jl	1707	issue	closed	2026-09-23	2026-09-28			17	`det(::Diagonal)` and `tr(::Diagonal)` fail for empty matrix.
+JuliaLang/LinearAlgebra.jl	1784	pr	merged	2026-10-17	2026-10-27	2026-10-27	JuliaLang/LinearAlgebra.jl#1032	67	Simplify the generic Bunch-Kaufman implementation and add right division
+JuliaLang/LinearAlgebra.jl	1865	issue	open	2026-11-14				12	`cumsum` tries to store non-structured results in structured matrix wrappers
+JuliaLang/LinearAlgebra.jl	1866	issue	open	2026-11-14				13	`sum(...; dims)` silently overflows narrow integers for banded matrices
+JuliaLang/LinearAlgebra.jl	1867	issue	open	2026-11-14				14	`tr` silently wraps narrow integers depending on matrix storage
+JuliaLang/LinearAlgebra.jl	1870	issue	open	2026-11-14				19	`mul!` into a wider destination wraps in the input type for structured matrices
+JuliaLang/LinearAlgebra.jl	1873	issue	open	2026-11-14				22	Unit triangular integer `\` returns the integer element type and throws `InexactError` on overflow
+JuliaLang/LinearAlgebra.jl	1875	issue	closed	2026-11-14	2026-11-19			25	`svdvals` of an integer `Diagonal` wraps on `typemin`, so `rank(Diagonal(Int8[-128])) == 0`
+JuliaLang/LinearAlgebra.jl	1876	issue	open	2026-11-14				41	`triu` and `tril` reject valid diagonal offsets for `BitMatrix`
+JuliaLang/LinearAlgebra.jl	1877	issue	open	2026-11-14				42	`transpose!(::BitMatrix, ::BitMatrix)` leaves old true bits in a nonzero destination
+JuliaLang/LinearAlgebra.jl	1878	issue	open	2026-11-14				43	`kron!` for `BitVector` and `BitMatrix` leaves stale true bits in zero result blocks
+JuliaLang/LinearAlgebra.jl	1880	pr	merged	2026-11-14	2026-11-14	2026-11-14	JuliaLang/LinearAlgebra.jl#1874	23	Fix `isposdef` and `cholesky` of empty banded matrices
+JuliaLang/LinearAlgebra.jl	1881	pr	merged	2026-11-14	2026-11-15	2026-11-15	JuliaLang/LinearAlgebra.jl#1868 JuliaLang/LinearAlgebra.jl#1869 JuliaLang/LinearAlgebra.jl#1872	15 16 21	Fix and test Boolean linear algebra
+JuliaLang/LinearAlgebra.jl	1882	pr	merged	2026-11-14	2026-11-15	2026-11-15	JuliaLang/LinearAlgebra.jl#1871	20 65	make factorization of Hermitian matrices be always floats
+JuliaLang/LinearAlgebra.jl	1884	issue	closed	2026-11-15	2026-11-16			69	`sylvester` and `lyap` overflow the stack for non-BLAS element types
+JuliaLang/LinearAlgebra.jl	1887	pr	merged	2026-11-15	2026-11-16	2026-11-16	JuliaLang/LinearAlgebra.jl#1884	69	Guard `lyap` and `sylvester` against overflow
+JuliaLang/LinearAlgebra.jl	1894	issue	not planned	2026-11-17	2026-11-17			66	`ldiv!(::Tridiagonal, B)` silently overwrites the matrix argument where other structured `ldiv!` methods do not
+JuliaLang/LinearAlgebra.jl	1895	pr	merged	2026-11-17	2026-11-17	2026-11-17	JuliaLang/LinearAlgebra.jl#1893	60	fix overflow with det of small-integer-typed matrices
+JuliaLang/LinearAlgebra.jl	1897	issue	closed	2026-11-18	2026-11-19			68	`imag` of a `UnitLowerTriangular`/`UnitUpperTriangular` matrix with complex elements keeps a complex element type
+JuliaLang/LinearAlgebra.jl	1898	issue	closed	2026-11-18	2026-11-18			72	`Matrix(F::BunchKaufman)` reconstructs a complex *symmetric* matrix wrongly — `AbstractMatrix(::BunchKaufman)` uses the adjoint where the symmetric case needs the transpose
+JuliaLang/LinearAlgebra.jl	1899	issue	closed	2026-11-18	2026-11-19			73	`cholesky(::SymTridiagonal; check=false)` throws `ZeroPivotException` on a zero diagonal pivot, so `isposdef(::SymTridiagonal)` throws instead of returning `false` — regression in LinearAlgebra 1.13
+JuliaLang/LinearAlgebra.jl	1900	issue	open	2026-11-18				74	`eigen` of a lower `Bidiagonal` returns `NaN` eigenvectors; integer upper throws
+JuliaLang/LinearAlgebra.jl	1901	issue	not planned	2026-11-18	2026-11-18			75	Right division by a singular `UpperTriangular{<:BlasFloat}` returns `NaN`/`Inf` silently, where `U \ b`, the generic path and the dense path raise `SingularException`
+JuliaLang/LinearAlgebra.jl	1902	issue	open	2026-11-18				76	`UpperHessenberg \ b` returns `NaN` silently on a singular matrix (1.13 regression)
+JuliaLang/LinearAlgebra.jl	1903	pr	merged	2026-11-18	2026-11-18	2026-11-18	JuliaLang/LinearAlgebra.jl#1898	72	fix bunch-kaufman constructor for complex symmetric matrices
+JuliaLang/LinearAlgebra.jl	1905	issue	open	2026-11-18				78	`sum`/`prod` of an empty `Adjoint`/`Transpose` throw instead of the neutral element
+JuliaLang/LinearAlgebra.jl	1906	issue	open	2026-11-18				79	`v' \ b` with a length-1 vector throws `istriu(::Vector, ::Int)` instead of solving
+JuliaLang/LinearAlgebra.jl	1907	issue	closed	2026-11-18	2026-11-19			80	`rmul!(C, A)` of two triangular matrices returns silently wrong values
+JuliaLang/LinearAlgebra.jl	1908	issue	closed	2026-11-18	2026-11-19			81	`rmul!(B::AbstractMatrix, A::Bidiagonal)` throws `DimensionMismatch` for a valid rectangular `B` (the size check has its arguments reversed)
+JuliaLang/LinearAlgebra.jl	1909	issue	open	2026-11-18				82	broadcast/`copyto!` into a banded matrix aliasing its source gives wrong values
+JuliaLang/LinearAlgebra.jl	1910	issue	open	2026-11-18				83	broadcast over 3+ structured matrices silently drops entries
+JuliaLang/LinearAlgebra.jl	1911	issue	closed	2026-11-18	2026-11-19			84	a `SymTridiagonal` with a `NaN` off-diagonal entry cannot be broadcast at all (`S .* 2` throws "broadcasted assignment breaks symmetry")
+JuliaLang/LinearAlgebra.jl	1912	pr	merged	2026-11-18	2026-11-19	2026-11-19	JuliaLang/LinearAlgebra.jl#1908	81	fix size check of bidiag rmul
+JuliaLang/LinearAlgebra.jl	1913	pr	merged	2026-11-18	2026-11-19	2026-11-19	JuliaLang/LinearAlgebra.jl#1897	68	make imaginary part of UnitTriangular real
+JuliaLang/LinearAlgebra.jl	1914	pr	merged	2026-11-18	2026-11-19	2026-11-19	JuliaLang/LinearAlgebra.jl#1911	84	Compare mirrored entries with `isequal` when broadcasting into a `SymTridiagonal`
+JuliaLang/LinearAlgebra.jl	1915	pr	merged	2026-11-18	2026-11-19	2026-11-19	JuliaLang/LinearAlgebra.jl#1899	73	Return `info` instead of throwing on a zero pivot in `_chol!(::Bidiagonal)`
+JuliaLang/LinearAlgebra.jl	1916	pr	open	2026-11-18			JuliaLang/LinearAlgebra.jl#1906	79	Forward `istriu`/`istril` of `Adjoint`/`Transpose` to the parent only for matrix parents
+JuliaLang/LinearAlgebra.jl	1917	pr	open	2026-11-18			JuliaLang/LinearAlgebra.jl#1905	78	Reduce an empty `Adjoint`/`Transpose` like its empty parent
+JuliaLang/LinearAlgebra.jl	1918	issue	open	2026-11-18				85	`copy`/`conj`/`real` of `Sym`/`Herm` wrapping a unit-triangular: wrong diagonal (1.11 regression)
+JuliaLang/LinearAlgebra.jl	1919	issue	open	2026-11-18				86	`triu`/`tril` of a complex `Hermitian` keep the diagonal's imaginary part
+JuliaLang/LinearAlgebra.jl	1920	issue	open	2026-11-18				87	`triu`/`tril` of structured matrices reject valid diagonal offsets
+JuliaLang/LinearAlgebra.jl	1921	issue	open	2026-11-18				88	triangular/symmetric wrappers of structured parents throw on many ops (1.11/1.12 regression)
+JuliaLang/LinearAlgebra.jl	1922	issue	open	2026-11-18				90	`isposdef` of a `Symmetric`/`Hermitian` containing `NaN` returns `true`
+JuliaLang/LinearAlgebra.jl	1923	issue	open	2026-11-18				91	`istriu`/`istril`/`isbanded` of an empty unit-triangular wrong beyond the diagonal (1.13 regression)
+JuliaLang/LinearAlgebra.jl	1924	issue	open	2026-11-18				92	`istriu`/`istril` of a triangular wrapping a banded matrix read the masked band (1.12 regression)
+JuliaLang/LinearAlgebra.jl	1925	issue	open	2026-11-18				93	`isdiag` fast path of matrix functions throws for unit-triangular / complex `Symmetric` (1.12 regression)
+JuliaLang/LinearAlgebra.jl	1926	issue	closed	2026-11-18	2026-11-20			94	inverse-trig of a real diagonal matrix throws `DomainError` instead of a complex result (1.12 regression)
+JuliaLang/LinearAlgebra.jl	1927	issue	open	2026-11-19				98	`svd` of a lower `Bidiagonal` with finite `floatmax` entries hangs on x86_64 (LAPACK `dbdsqr`)
+JuliaLang/LinearAlgebra.jl	1928	pr	merged	2026-11-19	2026-11-19	2026-11-19		95	Promote integer element types in `cbrt` of triangular matrices
+JuliaLang/LinearAlgebra.jl	1929	pr	merged	2026-11-19	2026-11-19	2026-11-19		96	Return `Inf` from `cond` of an all-zero integer `Diagonal`
+JuliaLang/LinearAlgebra.jl	1930	pr	merged	2026-11-19	2026-11-19	2026-11-19		97	Keep integer-valued real powers of a real diagonal matrix real
+JuliaLang/LinearAlgebra.jl	1934	pr	merged	2026-11-19	2026-11-19	2026-11-19	JuliaLang/LinearAlgebra.jl#1875	25	Fix `svdvals` and `svd` of a `Diagonal` with a signed integer `typemin`
+JuliaLang/LinearAlgebra.jl	1936	pr	merged	2026-11-19	2026-11-19	2026-11-19	JuliaLang/LinearAlgebra.jl#1907	80	Fix `rmul!` of two triangular matrices
+JuliaLang/LinearAlgebra.jl	1937	pr	open	2026-11-19			JuliaLang/LinearAlgebra.jl#1927	98	Route lower `Bidiagonal` `svd` through the upper form to avoid a LAPACK hang
+JuliaLang/LinearAlgebra.jl	1938	pr	merged	2026-11-19	2026-11-20	2026-11-20	JuliaLang/LinearAlgebra.jl#1926	94	complexify matrix functions when outside the real domain
+JuliaLang/LinearAlgebra.jl	1940	pr	closed	2026-11-20	2026-11-20		JuliaLang/LinearAlgebra.jl#1910	83	Use a sticky style for incompatible structured broadcasts
+JuliaLang/LinearAlgebra.jl	1941	pr	open	2026-11-20			JuliaLang/LinearAlgebra.jl#1909	82	Unalias the source in banded copyto! and broadcast
+JuliaSparse/SparseArrays.jl	1179	issue	open	2026-11-17				70	`\` on a square `Rational` sparse matrix loses exactness (routed through UMFPACK/`Float64`)
+JuliaSparse/SparseArrays.jl	1180	pr	merged	2026-11-18	2026-11-18	2026-11-18	JuliaSparse/SparseArrays.jl#1177	26	Widen integer entries before `abs` in sparse `opnorm`
+JuliaSparse/SparseArrays.jl	1181	pr	merged	2026-11-18	2026-11-18	2026-11-18	JuliaSparse/SparseArrays.jl#1178	27	Convert the adjoint of a `Bool` sparse vector to a `SparseMatrixCSC`
+JuliaSparse/SparseArrays.jl	1182	pr	merged	2026-11-18	2026-11-18	2026-11-18	JuliaSparse/SparseArrays.jl#1176	10	Throw `BoundsError` from sparse `findnext` and `findprev` for an out-of-bounds start
+JuliaSparse/SparseArrays.jl	1183	pr	merged	2026-11-18	2026-11-18	2026-11-18	JuliaSparse/SparseArrays.jl#1175	09	Promote the result of sparse `diff` like dense `diff`
+JuliaSparse/SparseArrays.jl	1184	issue	open	2026-11-18				77	`det` and `logabsdet` of a square `Rational` sparse matrix lose exactness (routed through UMFPACK/`Float64`); `Rational{BigInt}` throws
+JuliaSparse/SparseArrays.jl	1185	issue	open	2026-11-18				89	`isequal` between a sparse matrix and a lazy sparse adjoint/transpose is wrong on the nightly (implicit zero conjugated, real vs complex), and `isequal` is true while the hashes differ — regression after SparseArrays.jl#985
+JuliaStats/Statistics.jl	219	issue	open	2026-11-13				28	`var(::AbstractRange)` overflows in the closed form: negative variance for narrow integer ranges and for long `Int64` ranges
+JuliaStats/Statistics.jl	220	issue	open	2026-11-13				29	`var(r; dims=1)` on a range throws a `MethodError` (ambiguous `varm` keyword call)
+JuliaStats/Statistics.jl	221	issue	open	2026-11-13				30	`median(r; dims=1)` on a range throws `CanonicalIndexError`; `median`, `cor` and `cov` of empty ranges return values instead of throwing

@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Upstream states on the Upstream page: each cited issue and pull request
+  shows its state (open, merged, closed, not planned), dates and the entries
+  that cite it, from a committed snapshot (`data/upstream.tsv`) refreshed with
+  `just upstream` (site-kit `upstream_status.py`); the build never reads the
+  network. The upstream states are defined on the Statuses page.
+- `scripts/upstream_refs.py`, with Python tests, lists the upstream reports of
+  each entry's Status line for the snapshot.
+
+### Fixed
+
+- Status badges inside tables rendered as literal HTML text; the Upstream table
+  is now raw HTML. The History stat tiles linked to `/history/...` paths under
+  pretty URLs; they now use absolute links.
+
 - A `fixed upstream` status, with its own badge and table filter, for findings
   whose upstream report was closed by a merged pull request; such findings
   count as reported upstream on the History page.

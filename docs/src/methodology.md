@@ -69,4 +69,4 @@ prepared reproducer from the cross-reference.
 
 ## Site structure
 
-This site follows the shared [site-kit](https://github.com/s-celles/site-kit) specification, version 0.3 (tag `v0.3.1`): a common structure, statuses, upstream, history and disclosure pages across related projects.
+This site follows the shared [site-kit](https://github.com/s-celles/site-kit) specification, version 0.4 (tag `v0.4.0`): a common structure, statuses, upstream, history and disclosure pages across related projects.

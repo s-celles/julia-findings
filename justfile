@@ -2,7 +2,7 @@ default: check
 
 julia := env_var_or_default("JULIA", "julia")
 
-site_kit_tag := "v0.3.1"
+site_kit_tag := "v0.4.0"
 
 test:
     node --test test/interactive-tables.test.js

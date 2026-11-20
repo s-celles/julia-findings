@@ -4,7 +4,9 @@
 using Unicode
 
 # The page name of SPEC §15 (SK-PAGE-DISCLOSURE); the one place to change if the SPEC renames it.
-const DISCLOSURE_PAGE = "conflict-of-interest"
+const DISCLOSURE_PAGE = "disclosures"
+# The SPEC 0.3 name, kept as a redirect to the page (SPEC 0.4, §15).
+const OLD_DISCLOSURE_PAGE = "conflict-of-interest"
 
 const DISCLOSURE_COLUMNS = ["contributor", "orcid", "project", "kind", "role", "note"]
 const DISCLOSURES_URL = "https://github.com/s-celles/julia-findings/blob/main/docs/disclosures.tsv"
@@ -75,7 +77,7 @@ matrix also has a row for every system, tool or source declared in `rows`.
 function disclosure_page(rows, systems)
     io = IOBuffer()
     print(io, """
-    # Disclosure
+    # Disclosures
 
     $(disclosure_summary(rows))
 
@@ -157,6 +159,23 @@ function disclosure_page(rows, systems)
     """)
     return String(take!(io))
 end
+
+"A static page that sends a reader and a crawler from an old address to `url`."
+redirect_html(url) = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>Disclosures</title>
+    <meta http-equiv="refresh" content="0; url=$(url)">
+    <link rel="canonical" href="$(url)">
+    <meta name="robots" content="noindex">
+    </head>
+    <body>
+    <p>This page moved to <a href="$(url)">Disclosures</a>.</p>
+    </body>
+    </html>
+    """
 
 # --- citation from CITATION.cff ----------------------------------------------------------------------
 

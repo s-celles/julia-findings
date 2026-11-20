@@ -37,7 +37,7 @@ jobs:
         run: julia --project=docs docs/make.jl
       - name: Check the site against the site-kit SPEC
         run: |
-          git clone --depth 1 --branch v0.3.1 https://github.com/s-celles/site-kit.git /tmp/site-kit
+          git clone --depth 1 --branch v0.4.0 https://github.com/s-celles/site-kit.git /tmp/site-kit
           python3 -I /tmp/site-kit/tools/check_site.py --site docs/build --config site-kit.json --repo .
       - name: Check the build is deterministic
         run: |

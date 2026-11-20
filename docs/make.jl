@@ -270,7 +270,7 @@ function build_llms(findings)
     - Findings: $(SITE_URL)/findings/
     - History: $(SITE_URL)/history/
     - How we test: $(SITE_URL)/methodology/
-    - Disclosure: $(DISCLOSURE_URL)
+    - Disclosures: $(DISCLOSURE_URL)
     - Repository: https://github.com/s-celles/julia-findings
     - Citation: https://github.com/s-celles/julia-findings/blob/main/CITATION.cff
     """
@@ -440,7 +440,7 @@ makedocs(
         "Upstream" => "upstream.md",
         "History" => "history.md",
         "Methodology" => "methodology.md",
-        "Disclosure" => "generated/$(DISCLOSURE_PAGE).md",
+        "Disclosures" => "generated/$(DISCLOSURE_PAGE).md",
         "Statuses" => "statuses.md",
         "Contributing" => "generated/contributing.md",
         "Agent policy" => "generated/AGENTS.md",
@@ -449,6 +449,12 @@ makedocs(
 )
 
 build_llms(findings)
+
+# The SPEC 0.3 address of the disclosures page redirects to it (SPEC 0.4, §15).
+let old = joinpath(@__DIR__, "build", "generated", OLD_DISCLOSURE_PAGE)
+    mkpath(old)
+    write(joinpath(old, "index.html"), redirect_html(DISCLOSURE_URL))
+end
 
 # Post-build: give the home page's data stamp the `.data-stamp` class (SK-HOME-STAMP). Documenter escapes
 # raw HTML inside @eval, so the stamp is emitted as a Markdown paragraph and the class is added here.

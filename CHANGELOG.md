@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- site-kit SPEC 0.4 (tag `v0.4.0`): the disclosure page is now
+  `generated/disclosures/`, in the menu as Disclosures, the name of
+  `docs/disclosures.tsv`; the SPEC 0.3 address `generated/conflict-of-interest/`
+  redirects to it.
 - site-kit SPEC 0.3 (tag `v0.3.1`) for the CI check and `just upstream`; the
   menu gains Disclosure after Methodology. In CONTRIBUTING, the memory-safety
   paragraph is now titled "Security-sensitive findings", and a new

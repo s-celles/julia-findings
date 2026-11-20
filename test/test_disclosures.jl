@@ -40,7 +40,7 @@ end
 
 @testset "disclosure_page" begin
     page = disclosure_page(read_disclosures(ONE), ["Foo.jl", "Baz.jl"])
-    @test occursin("# Disclosure", page)
+    @test occursin("# Disclosures", page)
     @test occursin(disclosure_summary(read_disclosures(ONE)), page)
     @test occursin("## Jo Doe", page)
     @test occursin("https://orcid.org/0000-0001-2345-6789", page)
@@ -90,4 +90,14 @@ license: MIT
     @test occursin("year = {2026}", bib)
     @test occursin("url = {https://github.com/s-celles/julia-findings}", bib)
     @test citation_key((; c..., authors = [("Dupré-Éloi", "A")])) == "dupreeloi2026juliafindings"
+end
+
+@testset "redirect from the SPEC 0.3 address" begin
+    html = redirect_html("https://example.org/generated/disclosures/")
+    @test occursin("<meta http-equiv=\"refresh\" content=\"0; url=https://example.org/generated/disclosures/\">", html)
+    @test occursin("<link rel=\"canonical\" href=\"https://example.org/generated/disclosures/\">", html)
+    @test occursin("<a href=\"https://example.org/generated/disclosures/\">", html)
+    @test !occursin('—', html)
+    @test DISCLOSURE_PAGE == "disclosures"
+    @test OLD_DISCLOSURE_PAGE == "conflict-of-interest"
 end

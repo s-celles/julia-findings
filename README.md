@@ -26,7 +26,7 @@ and contributor; SparseArrays.jl, reporter; Statistics.jl, reporter;
 Concolic.jl, author; no funding, employment or other interest in a system
 examined; works with an AI assistant.
 The declarations are in [docs/disclosures.tsv](docs/disclosures.tsv) and on the
-[Disclosure page](https://s-celles.github.io/julia-findings/generated/conflict-of-interest/).
+[Disclosures page](https://s-celles.github.io/julia-findings/generated/disclosures/).
 
 ## Why this repository exists
 

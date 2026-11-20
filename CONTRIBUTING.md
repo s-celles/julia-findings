@@ -25,7 +25,7 @@ to open something upstream.
 examined (issues, pull requests, maintainer roles), any funding, employment or
 other interest, and their use of AI assistants, in their own rows of
 [docs/disclosures.tsv](https://github.com/s-celles/julia-findings/blob/main/docs/disclosures.tsv);
-the [Disclosure page](https://s-celles.github.io/julia-findings/generated/conflict-of-interest/)
+the [Disclosures page](https://s-celles.github.io/julia-findings/generated/disclosures/)
 is generated from it. A change that adds or updates an entry is not complete
 without the rows of the person it is made for: an agent that makes the change
 adds or updates those rows, and the person confirms them. When a row changes,
